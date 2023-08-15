@@ -1,3 +1,9 @@
+<?php 
+include('../connection.php');
+if(!isset( $_SESSION['admin_loggedin'])){
+    header('location:login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -5,7 +11,7 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Finance</title>
+    <title>Admin Dashboard</title>
     <link rel="icon" href="img/logo.png" type="image/png">
 
     <link rel="stylesheet" href="css/bootstrap1.min.css" />
@@ -39,6 +45,11 @@
 
     <link rel="stylesheet" href="css/style1.css" />
     <link rel="stylesheet" href="css/colors/default.css" id="colorSkinCSS">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
 </head>
 
 <body class="crm_body_bg">
@@ -49,28 +60,39 @@
 
 
     <section class="main_content dashboard_part">
+        <div class="main_content_iner ">    
+        <div class="container me-5 mt-5">
+        <h2 class="text-center mb-4 fw-bold pt-2 mt-2 pb-3 ">User Contacts </h2>
+
+<table class="table table-light table-bordered text-center">
+    <tr class="fw-bold">
+        <th>Username</th>
+        <th>Phone No</th>
+        <th>Email</th>
+            <th>Message</th>
 
 
 
-        <div class="main_content_iner ">
-            <div class="container-fluid plr_30 body_white_bg pt_30">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="single_element">
-                            <div class="quick_activity">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="quick_activity_wrap">
+    </tr>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<?php 
 
-                </div>
-            </div>
+$select_team_query = "SELECT * FROM `tbl_usercontact`";
+$select_query_run = mysqli_query($con, $select_team_query);
+while($user_cont = mysqli_fetch_array($select_query_run)){
+?>
+    <tr>
+     <td><?php echo $user_cont['u_name']?></td>
+     <td><?php echo $user_cont['phone_no']?></td>
+     <td><?php echo $user_cont['email']?></td>
+     <td><?php echo $user_cont['message']?></td>
+        
+
+    </tr>
+<?php } ?>
+
+</table>
+</div>
         </div>
 
         <div class="footer_part">
@@ -78,7 +100,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         <div class="footer_iner text-center">
-                            <p>2020 © Influence - Designed by<a href="#"> Dashboard</a></p>
+                            <p>2e020 © Influenc - Designed by<a href="#"> Dashboard</a></p>
                         </div>
                     </div>
                 </div>

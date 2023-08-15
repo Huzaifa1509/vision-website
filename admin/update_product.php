@@ -1,18 +1,35 @@
 <?php
 include("..\connection.php");
 if(!isset( $_SESSION['admin_loggedin'])){
-    header('location:login.php');
+  header('location:login.php');
 }
+$get_id = $_GET['id'];
+$query = "SELECT * FROM `tbl_category` ";
+$query_run = mysqli_query($con , $query);
 
+$select_query = "SELECT * FROM `tbl_brand`";
+$select_query_run = mysqli_query($con , $select_query);
 
-if(isset($_POST['submitbtn'])){
-    $brand = $_POST['brand_name'];
-    $query = "INSERT INTO `tbl_brand`( `brand_name`) VALUES ('$brand')";
-    $query_run = mysqli_query($con , $query);
-    header("location:addproduct.php");
+if(isset($_POST['btn_submit'])){
+
+  $product_name = $_POST['p_name'];
+  $product_price = $_POST['p_price'];
+  $product_description = $_POST['p_description'];
+  $product_brand = $_POST['brand'];
+  $product_category = $_POST['category'];
+  $product_qty = $_POST['p_qty'];
+  $product_image = $_FILES['p_img']['name'];
+  $image_tmp = $_FILES['p_img']['tmp_name'];
+  $img_path = './img/' . $product_image;
+  move_uploaded_file($image_tmp,$img_path);
+
+  $query_insert = "UPDATE `tbl_products` SET `p_name`='$product_name',`p_brand`='$product_brand',`p_price`='$product_price',`p_img`='$product_image',`p_description`='$product_description',`p_cat`='$product_category',`p_qty`='$product_qty' WHERE `p_id`= '$get_id'";
+  $query_insert_run = mysqli_query($con , $query_insert);
+  if($query_insert_run){
+  echo "<script>alert('product Updated !')</script>";
+  header('location:showproducts.php');
+  }
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -21,7 +38,7 @@ if(isset($_POST['submitbtn'])){
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Add brand</title>
+    <title>Finance</title>
     <link rel="icon" href="img/logo.png" type="image/png">
 
     <link rel="stylesheet" href="css/bootstrap1.min.css" />
@@ -73,25 +90,54 @@ if(isset($_POST['submitbtn'])){
                     <div class="col-lg-12">
                         <div class="white_box mb_30">
                             <div class="box_header ">
-                                <div class="main-title">
-                                    <h3 class="mb-0">Add Brand</h3>
+                                <div class="main-title">    
+                                    <h3 class="mb-0">Update Product</h3>
                                 </div>
                             </div>
-                            <form method="post" >
-                                <div class="mb-3">
-                                 <label>Brand Name</label>
-                                 <input type="text" class="form-control" id="exampleInputEmail1" name="brand_name" required>
-                                </div>
-  
+                            <form method="post" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label>Name</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" name="p_name">
+  </div>
+  <div class="mb-3">
+    <label>Brand</label>
+    <select class="form-select" id="inputGroupSelect01" name="brand">
+     <?php while($brand = mysqli_fetch_array($select_query_run)){?>
+      <option value="<?php echo $brand['brand_id'];?>"><?php echo $brand['brand_name'];?></option>
+      <?php } ?>
+    </select>
+    
+  </div>  
+  <div class="mb-3">
+    <label>Price</label>
+    <input type="number" class="form-control" id="exampleInputEmail1" name="p_price">
+  </div>
+  <div class="mb-3">
+    <label>Image</label>
+    <input type="file" class="form-control" id="exampleInputEmail1" name="p_img">
+  </div>
+  <div class="mb-3">
+    <label>Description</label>
+    <textarea type="text" class="form-control" id="exampleInputEmail1" name="p_description"></textarea>
+  </div>
+  <div class="mb-3">
+    <label>Quantity</label>
+    <input type="number" class="form-control" id="exampleInputEmail1" name="p_qty">
+  </div>
+  <div class="mb-3">
+    <label>Category</label>
+    <select class="form-select" id="inputGroupSelect01" name="category" >
+      <?php while($data = mysqli_fetch_array($query_run)){?>
+    <option value="<?php echo $data['cat_id'];?>"><?php echo $data['cat_name']; ?></option>
+    <?php } ?>
+  </select>
+  </div>
 
-
-                                 <input type="submit" value="Submit" name="submitbtn" class="btn btn-primary">
-                            </form>
+  <input type="submit" value="Update" name="btn_submit" class="btn btn-primary">
+</form>
                                 
                         </div>
                     </div>
-
-
 
                 </div>
             </div>

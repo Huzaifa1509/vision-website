@@ -1,5 +1,8 @@
 <?php
 include("..\connection.php");
+if(!isset( $_SESSION['admin_loggedin'])){
+  header('location:login.php');
+}
 $query = "SELECT * FROM `tbl_category` ";
 $query_run = mysqli_query($con , $query);
 
@@ -13,13 +16,13 @@ if(isset($_POST['btn_submit'])){
   $product_description = $_POST['p_description'];
   $product_brand = $_POST['brand'];
   $product_category = $_POST['category'];
-
+  $product_quantity = $_POST['p_qty'];
   $product_image = $_FILES['p_img']['name'];
   $image_tmp = $_FILES['p_img']['tmp_name'];
-  $img_path = '../img/' . $product_image;
-  move_uploaded_file($img_path,$image_tmp);
+  $img_path = './img/' . $product_image;
+  move_uploaded_file($image_tmp,$img_path);
 
-  $query_insert = "INSERT INTO `tbl_products`( `p_name`, `p_brand`, `p_price`, `p_img`, `p_description`,`p_cat`) VALUES ('$product_name','$product_brand','$product_price','$product_image','$product_description','$product_category')";
+  $query_insert = "INSERT INTO `tbl_products`( `p_name`, `p_brand`, `p_price`, `p_img`, `p_description`,`p_cat`,`p_qty`) VALUES ('$product_name','$product_brand','$product_price','$product_image','$product_description','$product_category','$product_quantity')";
   $query_insert_run = mysqli_query($con , $query_insert);
   echo "<script>alert('component added !')</script>";
 
@@ -85,7 +88,7 @@ if(isset($_POST['btn_submit'])){
                         <div class="white_box mb_30">
                             <div class="box_header ">
                                 <div class="main-title">
-                                    <h3 class="mb-0">Add Component</h3>
+                                    <h3 class="mb-0">Add Product</h3>
                                 </div>
                             </div>
                             <form method="post" enctype="multipart/form-data">
@@ -113,6 +116,10 @@ if(isset($_POST['btn_submit'])){
   <div class="mb-3">
     <label>Description</label>
     <textarea type="text" class="form-control" id="exampleInputEmail1" name="p_description"></textarea>
+  </div>
+  <div class="mb-3">
+    <label>Quantity</label>
+    <input type="number" class="form-control" id="exampleInputEmail1" name="p_qty">
   </div>
   <div class="mb-3">
     <label>Category</label>
