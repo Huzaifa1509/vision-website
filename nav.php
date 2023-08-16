@@ -44,7 +44,10 @@
                 <div class="header-wrapicon2">
                     <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown"
                         alt="ICON">
-                    <span class="header-icons-noti">0</span>
+                    <span class="header-icons-noti"><?php 
+                            $count = count($_SESSION['products']);
+                            echo $count;
+                            ?></span>
 
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
@@ -71,6 +74,8 @@
                             <?php }}?>
                         </ul>
                         <div class="header-cart-total">
+
+
                             Total: $75.00
                         </div>
                         <div class="header-cart-buttons">

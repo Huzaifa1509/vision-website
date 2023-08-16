@@ -18,7 +18,7 @@ if(isset($_POST['btn_cart'])){
 	   "productimage" => $_POST['p_image'],
 	   "productdes" => $_POST['p_description'],
 	   "productquantity" => 1  );
-       
+      
 
 	   }
 	}
@@ -81,6 +81,7 @@ if(isset($_POST['btn_cart'])){
 
 	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/m_board.jpg);">
 		<h2 class="l-text2 t-center">
+			
 			Motherboard
 		</h2>
 		<p class="m-text13 t-center">
@@ -99,30 +100,20 @@ if(isset($_POST['btn_cart'])){
 						</h4>
 						<ul class="p-b-54">
 							<li class="p-t-4">
-								<a href="#" class="s-text13 active1">
+								<a href="shop_allproducts.php" class="s-text13 active1">
 									All
 								</a>
 							</li>
+							<?php $select_cat = "SELECT * FROM `tbl_category`";
+							$select_cat_run = mysqli_query($con , $select_cat);
+							while($category = mysqli_fetch_array($select_cat_run)){?>
 							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Women
+								<a href="products.php?id=<?php echo $category['cat_id']?>" class="s-text13">
+									<?php echo $category['cat_name']?>
 								</a>
 							</li>
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Men
-								</a>
-							</li>
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Kids
-								</a>
-							</li>
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Accesories
-								</a>
-							</li>
+							<?php }?>
+
 						</ul>
 
 
@@ -138,19 +129,15 @@ if(isset($_POST['btn_cart'])){
 								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
 							</button>
 						</div>
-
-<!-- 
-						<span class="s-text8 p-t-5 p-b-5">
-							Showing 1–12 of 16 results
-						</span> -->
 					</div>
-					<div class="row">
+					<div class="row" id="fetch_search_data"></div>
+					<div class="row" id="hide">
 						<?php while($data = mysqli_fetch_array($query_run)){?>
 						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
 
 							<div class="block2">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-									<img src="<?php echo 'admin/img/' . $data['p_img'];?>" alt="IMG-PRODUCT">
+									<img src="<?php echo 'admin/img/' . $data['p_img'];?>" alt="IMG-PRODUCT" style="height:250px;">
 									<div class="block2-overlay trans-0-4">
 										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
 											<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
@@ -278,6 +265,11 @@ if(isset($_POST['btn_cart'])){
 		integrity="sha512-DI3rPuZDcpH/mSGyN22erN5QFnhl760f50/te7FTIYxodEF8jJnSFnfnmG/c+osmIQemvUrnBtxnMpNdzvx1/g=="
 		data-cf-beacon='{"rayId":"7ec6134a2ea9896e","version":"2023.4.0","b":1,"token":"cd0b4b3a733644fc843ef0b185f98241","si":100}'
 		crossorigin="anonymous"></script>
+
+		<script>
+
+  
+</script>	
 
 	
 </body>
