@@ -30,20 +30,6 @@
 
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-    <style>
-        .social-list{
-  display:flex;
-  list-style:none;
-  justify-content:center;
-  padding:0;
-}
-
-.social-list li{
-  padding:10px;
-  color:#8E24AA;
-  font-size:19px;
-}
-    </style>
 
 </head>
 <body class="animsition">
@@ -52,7 +38,7 @@
 
 	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(images/other.jpg);">
 		<h2 class="l-text2 t-center">
-			User Name
+		<?php echo $_SESSION["uname"].'&nbsp;'.$_SESSION["lastname"] ;?>
 		</h2>
 
 	</section>
@@ -66,31 +52,22 @@
             <div class=" p-3 py-4">
                 
                 <div class="text-center">
-                    <img src="https://i.imgur.com/bDLhJiP.jpg" width="100" class="rounded-circle">
+                    <img src="images/<?php echo $_SESSION["upic"]; ?>" width="100" class="rounded-circle">
                 </div>
                 
                 <div class="text-center mt-3">
-                    <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span>
-                    <h5 class="mt-2 mb-0">Alexender Schidmt</h5>
-                    <span>UI/UX Designer</span>
+                    <!-- <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span> -->
+                    <h4 class="mt-2 mb-2"><?php echo $_SESSION["uname"].'&nbsp;'.$_SESSION["lastname"] ;?></h4>
+                    <span><?php echo $_SESSION["email"] ;?></span>
                     
-                    <div class="px-4 mt-1">
-                        <p class="fonts">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <div class="px-4 mt-2 mb-3">
+                        <p class="fonts">Welcome <?php echo $_SESSION["uname"].'&nbsp;'.$_SESSION["lastname"] ;?>, hope you are enjoying our services. You can also update your Profile and take further Actions.  </p>
                     
                     </div>
-                    
-                     <ul class="social-list">
-                        <li><i class="fa fa-facebook"></i></li>
-                        <li><i class="fa fa-dribbble"></i></li>
-                        <li><i class="fa fa-instagram"></i></li>
-                        <li><i class="fa fa-linkedin"></i></li>
-                        <li><i class="fa fa-google"></i></li>
-                    </ul>
-                    
                     <div class="buttons">
                         
-                        <button class="btn btn-outline-primary px-4">Update</button>
-                        <button class="btn btn-primary px-4 ms-3">LOG OUT</button>
+                        <a href="updateprofile.php?id=<?php echo $_SESSION["id"] ;?>"><button class="btn btn-primary px-4">Update</button></a>
+                        <a href="logout.php" onclick="return confirm('Are you sure you want to logout?')"><button class="btn btn-danger px-4 ms-3">LOG OUT</button></a>
                     </div>
                     
                     

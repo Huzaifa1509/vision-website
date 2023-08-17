@@ -15,6 +15,7 @@ if(isset($_POST['loginbtn'])){
             $_SESSION["email"] = $row["email"];
             $_SESSION["uname"] = $row['uname'];
             $_SESSION["lastname"] = $row["lastname"];
+            $_SESSION["upic"] = $row["user_pic"];
 
             $_SESSION["login"] = true;
 

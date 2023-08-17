@@ -72,17 +72,29 @@ if(isset($_POST['submitbtn'])){
 						<h4 class="m-text26 p-b-36 p-t-15">
 							Send us your message
 						</h4>
+						<?php     if(isset($_SESSION['check'])){?>
 						<div class="bo4 of-hidden size15 m-b-20">
 							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="u_name"
-								placeholder="Full Name" required>
-						</div>
-						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="number" name="phone_number"
-								placeholder="Phone Number" required>
+								placeholder="Full Name" required value="<?php echo $_SESSION["uname"].'&nbsp;'.$_SESSION["lastname"] ;?>">
 						</div>
 						<div class="bo4 of-hidden size15 m-b-20">
 							<input class="sizefull s-text7 p-l-22 p-r-22" type="email" name="email"
-								placeholder="Email Address" required>
+								placeholder="Email Address" required  value="<?php echo $_SESSION["email"] ;?>">
+						</div>
+						<?php }else{?>
+							<div class="bo4 of-hidden size15 m-b-20">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="u_name"
+								placeholder="Full Name" required value="unknown user">
+						</div>
+						<div class="bo4 of-hidden size15 m-b-20">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="email" name="email"
+								placeholder="Email Address" required  value="anonymous">
+						</div>
+						<?php }?>
+
+						<div class="bo4 of-hidden size15 m-b-20">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="number" name="phone_number"
+								placeholder="Phone Number" required>
 						</div>
 						<textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="message"
 							placeholder="Message"  required></textarea>

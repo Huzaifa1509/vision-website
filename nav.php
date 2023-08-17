@@ -40,16 +40,16 @@
                     <span class="header-icons">
                         <?php echo $_SESSION["uname"].'&nbsp;'.$_SESSION["lastname"] ;?>
                     </span>
-                    <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                    <img src="images/<?php echo $_SESSION["upic"]; ?>" class="header-icon1 rounded-circle" alt="ICON">
                 </a><span class="linedivide1"></span>
-                <a href="logout.php">LOG OUT</a>
+                <a href="logout.php"  onclick="return confirm('Are you sure you want to logout?')">LOG OUT</a>
                 <?php }else{
                     ?>
                 <a href="login.php" class="header-wrapicon1 dis-block">
                     <span class="header-icons">
                         LOGIN
                     </span>
-                    <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                    <img src="images/icons/icon-header-03.png" class="header-icon1" alt="ICON">
                 </a>
                 <?php }?>
                 <span class="linedivide1"></span>
@@ -132,8 +132,12 @@
         <div class="btn-show-menu">
 
             <div class="header-icons-mobile">
-                <a href="userprofile.php" class="header-wrapicon1 dis-block">
-                    <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                <a class="header-wrapicon1 dis-block">
+                <?php if(isset($_SESSION['check'])){?>
+                    <a href="userprofile.php"><img src="images/<?php echo $_SESSION['upic'];?>" class="header-icon1 rounded-circle" alt="ICON" style="height:30px; width:30px;"></a>
+                    <?php }else{?>
+                    <img src="images/icons/icon-header-03.png" class="header-icon1" alt="ICON" >
+                     <?php }?>
                 </a>
                 <span class="linedivide2"></span>
                 <div class="header-wrapicon2">
@@ -233,7 +237,7 @@
                 </li>
                 <?php     if(isset($_SESSION['check'])){?>
                     <li class="item-menu-mobile">
-                    <a href="login.php"> Log Out</a>
+                    <a href="login.php"  onclick="return confirm('Are you sure you want to logout?')"> Log Out</a>
                 </li>
                 <?php }else{?>
                     <li class="item-menu-mobile">
