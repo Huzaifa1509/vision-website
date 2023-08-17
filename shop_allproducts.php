@@ -101,7 +101,8 @@ if(isset($_POST['btn_cart'])){
 					</div>
 
 					<div class="row">
-					<?php while($data = mysqli_fetch_array($query_run)){?>
+					<?php while($data = mysqli_fetch_array($query_run)){
+						$cat_id = $data['p_cat'];?>
 						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
 
 							<div class="block2">
@@ -142,11 +143,11 @@ if(isset($_POST['btn_cart'])){
 									</div>
 								</div>
 								<div class="block2-txt p-t-20">
-									<a href="product_detail.php?id=<?php echo $data['p_id'];?>" class="block2-name dis-block s-text3 p-b-5">
+									<a href="product_detail.php?id=<?php echo $data['p_id'];?>&&cat_id=<?php echo $cat_id;?>" class="block2-name dis-block s-text3 p-b-5">
 										<?php echo $data['p_name'];?>
 									</a>
 									<span class="block2-price m-text6 p-r-5">
-										<?php echo "Rs. " .$data['p_price'];?>
+										<?php echo "$ " .$data['p_price'];?>
 									</span>
 								</div>
 							</div>

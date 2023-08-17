@@ -215,9 +215,11 @@
 			<div class="wrap-slick2">
 				<div class="slick2">
 					<?php 
-					$select_products = "SELECT * FROM tbl_products ORDER BY p_id DESC LIMIT 8";
+					$select_products = "SELECT * FROM tbl_products ORDER BY `p_id` DESC LIMIT 8";
 					$select_products_run = mysqli_query($con , $select_products);
 					while($item = mysqli_fetch_array($select_products_run)){
+
+						$cat_id = $item['p_cat'];
 					?>
 
 					<div class="item-slick2 p-l-15 p-r-15">
@@ -232,7 +234,7 @@
 										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
 									</a>
 									<div class="block2-btn-addcart w-size1 trans-0-4">
-											<a href="product_detail.php?id=<?php echo $item['p_id'];?>" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"
+											<a href="product_detail.php?id=<?php echo $item['p_id'];?>&&cat_id=<?php echo $cat_id;?>" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"
 												name="btn_cart" type="submit">
 												Details
 					                        </a>
@@ -240,7 +242,7 @@
 								</div>
 							</div>
 							<div class="block2-txt p-t-20">
-								<a href="product_detail.php?id=<?php echo $item['p_id'];?>"
+								<a href="product_detail.php?id=<?php echo $item['p_id'];?>&&cat_id=<?php echo $cat_id;?>"
 									class="block2-name dis-block s-text3 p-b-5">
 									<?php echo $item['p_name'];?>
 								</a>

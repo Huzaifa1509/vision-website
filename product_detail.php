@@ -206,7 +206,7 @@ if(isset($_POST['btn_cart'])){
 										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
 									</a>
 									<div class="block2-btn-addcart w-size1 trans-0-4">
-									<a href="product_detail.php?id=<?php echo $item['p_id'];?>" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"
+									<a href="product_detail.php?id=<?php echo $item['p_id'];?>&&cat_id=<?php echo $cat_id;?>" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"
 												name="btn_cart" type="submit">
 												Details
 					                        </a>
@@ -214,7 +214,7 @@ if(isset($_POST['btn_cart'])){
 								</div>
 							</div>
 							<div class="block2-txt p-t-20">
-								<a href="product_detail.php?id=<?php echo $item['p_id'];?>" class="block2-name dis-block s-text3 p-b-5">
+								<a href="product_detail.php?id=<?php echo $item['p_id'];?>&&cat_id=<?php echo $cat_id;?>" class="block2-name dis-block s-text3 p-b-5">
 								<?php echo $item['p_name'];?>
 								</a>
 								<span class="block2-price m-text6 p-r-5">
@@ -263,30 +263,6 @@ if(isset($_POST['btn_cart'])){
 
 	<script type="text/javascript" src="vendor/slick/slick.min.js"></script>
 	<script type="text/javascript" src="js/slick-custom.js"></script>
-
-	<script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
-	<script type="text/javascript">
-		$('.block2-btn-addcart').each(function () {
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-
-		$('.block2-btn-addwishlist').each(function () {
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to wishlist !", "success");
-			});
-		});
-
-		$('.btn-addcart-product-detail').each(function () {
-			var nameProduct = $('.product-detail-name').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to wishlist !", "success");
-			});
-		});
-	</script>
 
 	<script src="js/main.js"></script>
 	<script defer
