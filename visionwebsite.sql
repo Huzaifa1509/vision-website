@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2023 at 11:49 PM
+-- Generation Time: Aug 17, 2023 at 09:20 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -103,8 +103,10 @@ CREATE TABLE `tbl_products` (
 --
 
 INSERT INTO `tbl_products` (`p_id`, `p_name`, `p_brand`, `p_price`, `p_img`, `p_description`, `p_cat`, `p_qty`) VALUES
-(3, 'Ryzen 2000 RAM', 1, 9000, 'sss.jpg', 'ghgfhgbvbnfghfcbgf', 1, 10),
-(4, 'Ryzen AM4 B550 ATX Motherboard', 1, 90000, 'motherboard123.jpg', 'yfffvjfjmyhfuuyjhgfj', 2, 50);
+(4, 'Ryzen AM4 B550 ATX Motherboard', 1, 90000, 'motherboard123.jpg', 'yfffvjfjmyhfuuyjhgfj', 2, 50),
+(5, 'Ryzen Ram', 1, 5000, 'ram.jpg', 'ramfdfdfdsfdfsdaffadf', 1, 500),
+(8, 'mboard', 1, 45, 'gpu56.jpg', 'rtrerw', 2, 55),
+(12, 'Ryzen RAM 32GB', 1, 600, 'ram.jpg2023-08-17-18-46', 'gersge', 1, 45);
 
 -- --------------------------------------------------------
 
@@ -117,16 +119,18 @@ CREATE TABLE `tbl_user` (
   `uname` varchar(100) NOT NULL,
   `lastname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `user_pic` varchar(1000) NOT NULL DEFAULT 'images/icons/icon-header-03.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`id`, `uname`, `lastname`, `email`, `password`) VALUES
-(1, 'Huzaifa', 'Irfan', 'huzaifairfan2144@gmail.com', '123'),
-(2, 'ali', 'khan', 'ahmad@gmail.com', '5231');
+INSERT INTO `tbl_user` (`id`, `uname`, `lastname`, `email`, `password`, `user_pic`) VALUES
+(1, 'Huzaifa', 'Irfan', 'huzaifairfan2144@gmail.com', '123', 'card.jpg2023-08-17-21-21'),
+(2, 'ali', 'khan', 'ahmad@gmail.com', '5231', 'images/icons/icon-header-03.png'),
+(3, 'Sarim', 'Khan', 'sarimkhan@gmail.com', '1234', 'images/icons/icon-header-03.png');
 
 -- --------------------------------------------------------
 
@@ -219,13 +223,13 @@ ALTER TABLE `tbl_category`
 -- AUTO_INCREMENT for table `tbl_products`
 --
 ALTER TABLE `tbl_products`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_usercontact`
