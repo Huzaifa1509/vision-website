@@ -97,7 +97,7 @@ if(isset($_POST['submitbtn'])){
 		</div>
 	</section>
 
-<?php include("footer.html");?>
+<?php include("footer.php");?>
 
 	<div class="btn-back-to-top bg0-hov" id="myBtn">
 		<span class="symbol-btn-back-to-top">

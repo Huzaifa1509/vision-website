@@ -9,7 +9,8 @@ if(!isset( $_SESSION['admin_loggedin'])){
 <html lang="en">
 <head>
     <title>Users data</title>
-    <link rel="icon" href="img/logo.png" type="image/png">
+    <link rel="icon" href="../images/icons/favicon.png" type="image/png">
+
 
     <link rel="stylesheet" href="css/bootstrap1.min.css" />
 

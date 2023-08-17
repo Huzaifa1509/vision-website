@@ -15,7 +15,6 @@ if(isset($_POST["submitbtn"])){
             $queryinsert = "INSERT INTO `tbl_user` VALUES ('','$name','$lname','$email','$password')";
             mysqli_query($con , $queryinsert);
             
-          echo" <script>alert('Account Created');</script>";
           header("location:login.php");
 
         }

@@ -4,14 +4,12 @@ if(!isset( $_SESSION['admin_loggedin'])){
     header('location:login.php');
 }
 
-
 if(isset($_POST['submitbtn'])){
     $brand = $_POST['brand_name'];
     $query = "INSERT INTO `tbl_brand`( `brand_name`) VALUES ('$brand')";
     $query_run = mysqli_query($con , $query);
     header("location:addproduct.php");
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -22,7 +20,7 @@ if(isset($_POST['submitbtn'])){
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Add brand</title>
-    <link rel="icon" href="img/logo.png" type="image/png">
+    <link rel="icon" href="../images/icons/favicon.png" type="image/png">
 
     <link rel="stylesheet" href="css/bootstrap1.min.css" />
 

@@ -24,25 +24,19 @@
             </h4>
             <ul>
                 <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Men
+                    <a href="shop_allproducts.php" class="s-text7">
+                        All
                     </a>
                 </li>
+                <?php $select_cat = "SELECT * FROM `tbl_category`";
+                $select_cat_run = mysqli_query($con , $select_cat);
+                while($category = mysqli_fetch_array($select_cat_run)){?>
                 <li class="p-b-9">
                     <a href="#" class="s-text7">
-                        Women
+                        <?php echo $category['cat_name']?>
                     </a>
                 </li>
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Dresses
-                    </a>
-                </li>
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Sunglasses
-                    </a>
-                </li>
+                <?php }?>
             </ul>
         </div>
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">

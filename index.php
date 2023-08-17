@@ -1,4 +1,5 @@
 <?php include("connection.php");?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +54,7 @@
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15"
 							data-appear="fadeInDown">
-							Women Collection 2018
+							New Gadgets 2023
 						</span>
 						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37"
 							data-appear="fadeInUp">
@@ -61,7 +62,8 @@
 						</h2>
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
 
-							<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+							<a href="shop_allproducts.php"
+								class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
 								Shop Now
 							</a>
 						</div>
@@ -72,7 +74,7 @@
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15"
 							data-appear="rollIn">
-							Women Collection 2018
+							Fresh Stock 2023
 						</span>
 						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37"
 							data-appear="lightSpeedIn">
@@ -80,7 +82,8 @@
 						</h2>
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
 
-							<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+							<a href="shop_allproducts.php"
+								class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
 								Shop Now
 							</a>
 						</div>
@@ -90,7 +93,7 @@
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15"
 							data-appear="rotateInDownLeft">
-							Women Collection 2018
+							New Collections 2023
 						</span>
 						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37"
 							data-appear="rotateInUpRight">
@@ -98,7 +101,8 @@
 						</h2>
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
 
-							<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+							<a href="shop_allproducts.php"
+								class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
 								Shop Now
 							</a>
 						</div>
@@ -166,19 +170,19 @@
 							</a>
 						</div>
 					</div>
-                    <?php     if(isset($_SESSION['check'])){?>
-						<div class="block1 hov-img-zoom pos-relative m-b-30">
+					<?php     if(isset($_SESSION['check'])){?>
+					<div class="block1 hov-img-zoom pos-relative m-b-30">
 						<img src="images/pexels-anete-lusina-4792733.jpg" alt="IMG-BENNER" style="height:310px">
 						<div class="block1-wrapbtn w-size2">
 
-							<a href="products.php?id=1" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+							<a href="shop_allproducts.php" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
 								All
 							</a>
 						</div>
 					</div>
 					<?php }else{?>
-						<div class="block2 wrap-pic-w pos-relative m-b-30">
-						<img src="images/icons/bg-01.jpg" alt="IMG">
+					<div class="block2 wrap-pic-w pos-relative m-b-30">
+						<img src="images/icons/bg-01.jpg" alt="IMG" style="height:310px">
 						<div class="block2-content sizefull ab-t-l flex-col-c-m">
 							<h4 class="m-text4 t-center w-size3 p-b-8">
 								Sign up & get 20% off
@@ -204,128 +208,50 @@
 		<div class="container">
 			<div class="sec-title p-b-60">
 				<h3 class="m-text5 t-center">
-					Featured Products
+					Latest Products
 				</h3>
 			</div>
 
 			<div class="wrap-slick2">
 				<div class="slick2">
+					<?php 
+					$select_products = "SELECT * FROM tbl_products ORDER BY p_id DESC LIMIT 8";
+					$select_products_run = mysqli_query($con , $select_products);
+					while($item = mysqli_fetch_array($select_products_run)){
+					?>
 
 					<div class="item-slick2 p-l-15 p-r-15">
 
 						<div class="block2">
 							<div class="block2-img wrap-pic-w of-hidden pos-relative">
-								<img src="images/item-03.jpg" alt="IMG-PRODUCT">
+								<img src="<?php echo 'admin/img/' . $item['p_img'];?>" alt="IMG-PRODUCT"
+									style="height: 300px;">
 								<div class="block2-overlay trans-0-4">
 									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
 										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
 										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
 									</a>
 									<div class="block2-btn-addcart w-size1 trans-0-4">
-
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Add to Cart
-										</button>
+											<a href="product_detail.php?id=<?php echo $item['p_id'];?>" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"
+												name="btn_cart" type="submit">
+												Details
+					                        </a>
 									</div>
 								</div>
 							</div>
 							<div class="block2-txt p-t-20">
-								<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-									Denim jacket blue
+								<a href="product_detail.php?id=<?php echo $item['p_id'];?>"
+									class="block2-name dis-block s-text3 p-b-5">
+									<?php echo $item['p_name'];?>
 								</a>
 								<span class="block2-price m-text6 p-r-5">
-									$92.50
+									$
+									<?php echo $item['p_price'];?>
 								</span>
 							</div>
 						</div>
 					</div>
-					<div class="item-slick2 p-l-15 p-r-15">
-
-						<div class="block2">
-							<div class="block2-img wrap-pic-w of-hidden pos-relative">
-								<img src="images/item-05.jpg" alt="IMG-PRODUCT">
-								<div class="block2-overlay trans-0-4">
-									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-									</a>
-									<div class="block2-btn-addcart w-size1 trans-0-4">
-
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Add to Cart
-										</button>
-									</div>
-								</div>
-							</div>
-							<div class="block2-txt p-t-20">
-								<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-									Coach slim easton black
-								</a>
-								<span class="block2-price m-text6 p-r-5">
-									$165.90
-								</span>
-							</div>
-						</div>
-					</div>
-					<div class="item-slick2 p-l-15 p-r-15">
-
-						<div class="block2">
-							<div class="block2-img wrap-pic-w of-hidden pos-relative">
-								<img src="images/item-05.jpg" alt="IMG-PRODUCT">
-								<div class="block2-overlay trans-0-4">
-									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-									</a>
-									<div class="block2-btn-addcart w-size1 trans-0-4">
-
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Add to Cart
-										</button>
-									</div>
-								</div>
-							</div>
-							<div class="block2-txt p-t-20">
-								<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-									Coach slim easton black
-								</a>
-								<span class="block2-price m-text6 p-r-5">
-									$165.90
-								</span>
-							</div>
-						</div>
-					</div>
-					<div class="item-slick2 p-l-15 p-r-15">
-
-						<div class="block2">
-							<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-								<img src="images/item-07.jpg" alt="IMG-PRODUCT">
-								<div class="block2-overlay trans-0-4">
-									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-									</a>
-									<div class="block2-btn-addcart w-size1 trans-0-4">
-
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Add to Cart
-										</button>
-									</div>
-								</div>
-							</div>
-							<div class="block2-txt p-t-20">
-								<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-									Frayed denim shorts
-								</a>
-								<span class="block2-oldprice m-text7 p-r-5">
-									$29.50
-								</span>
-								<span class="block2-newprice m-text8 p-r-5">
-									$15.90
-								</span>
-							</div>
-						</div>
-					</div>
+					<?php }?>
 				</div>
 			</div>
 		</div>
@@ -355,7 +281,7 @@
 						<img src="images/shop-item-09.jpg" alt="IMG-BANNER">
 						<div class="ab-t-l sizefull flex-col-c-b p-l-15 p-r-15 p-b-20">
 							<div class="t-center">
-								<a href="product-detail.html" class="dis-block s-text3 p-b-5">
+								<a href="product_detail.php" class="dis-block s-text3 p-b-5">
 									Gafas sol Hawkers one
 								</a>
 								<span class="block2-oldprice m-text7 p-r-5">
@@ -438,7 +364,7 @@
 		</div>
 	</section>
 
-	<?php include("footer.html");?>
+	<?php include("footer.php");?>
 
 	<div class="btn-back-to-top bg0-hov" id="myBtn">
 		<span class="symbol-btn-back-to-top">
@@ -470,23 +396,6 @@
 	<script type="text/javascript" src="vendor/countdowntime/countdowntime.js"></script>
 
 	<script type="text/javascript" src="vendor/lightbox2/js/lightbox.min.js"></script>
-
-	<script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
-	<script type="text/javascript">
-		$('.block2-btn-addcart').each(function () {
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-
-		$('.block2-btn-addwishlist').each(function () {
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to wishlist !", "success");
-			});
-		});
-	</script>
 
 	<script src="js/main.js"></script>
 	<script defer

@@ -10,7 +10,8 @@ if(!isset( $_SESSION['admin_loggedin'])){
 <head>
  
     <title>Products Data</title>
-    <link rel="icon" href="img/logo.png" type="image/png">
+    <link rel="icon" href="../images/icons/favicon.png" type="image/png">
+
 
     <link rel="stylesheet" href="css/bootstrap1.min.css" />
 

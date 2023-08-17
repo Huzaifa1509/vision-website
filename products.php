@@ -1,7 +1,7 @@
 <?php 
 include("connection.php");
-$get_id = $_GET['id'];
-$select_query = "SELECT * FROM `tbl_products` WHERE `p_cat` = $get_id ";
+$cat_id = $_GET['id'];
+$select_query = "SELECT * FROM `tbl_products` WHERE `p_cat` = $cat_id ";
 $query_run = mysqli_query($con , $select_query);
 if(isset($_POST['btn_cart'])){
     if(isset($_SESSION['check'])){
@@ -13,7 +13,8 @@ if(isset($_POST['btn_cart'])){
 	   }
 	   else{
 	   $count = count($_SESSION['products']);
-	   $_SESSION['products'][$count] = array( "productname" => $_POST['p_name'],
+	   $_SESSION['products'][$count] = array( 
+	   "productname" => $_POST['p_name'],
 	   "productprice" => $_POST['p_price'],
 	   "productimage" => $_POST['p_image'],
 	   "productdes" => $_POST['p_description'],
@@ -23,7 +24,8 @@ if(isset($_POST['btn_cart'])){
 	   }
 	}
 	else{
-	   $_SESSION['products'][0]  = array( "productname" => $_POST['p_name'],
+	   $_SESSION['products'][0]  = array( 
+		              "productname" => $_POST['p_name'],
 					  "productprice" => $_POST['p_price'],
 					  "productimage" => $_POST['p_image'],
 					  "productdes" => $_POST['p_description'] );
@@ -34,6 +36,8 @@ if(isset($_POST['btn_cart'])){
                     header('location:login.php');
                 }
 } 
+
+
 ?>
 
 
@@ -42,7 +46,13 @@ if(isset($_POST['btn_cart'])){
 <html lang="en">
 
 <head>
-	<title>Motherboard</title>
+	<?php
+	$select_query_name = "SELECT * FROM `tbl_products` INNER JOIN `tbl_category` ON tbl_products.p_cat = tbl_category.cat_id WHERE `p_cat` = $cat_id LIMIT 1";
+	$select_query_name_run = mysqli_query($con , $select_query_name);
+	while($category = mysqli_fetch_array($select_query_name_run)){
+	?>
+	<title><?php echo $category['cat_name'];?></title>
+	<?php }?>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -79,14 +89,22 @@ if(isset($_POST['btn_cart'])){
 
 	<?php include("nav.php");?>
 
-	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/m_board.jpg);">
+	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/other.jpg);">
+	<?php
+	$select_query_name = "SELECT * FROM `tbl_products` INNER JOIN `tbl_category` ON tbl_products.p_cat = tbl_category.cat_id WHERE `p_cat` = $cat_id LIMIT 1";
+	$select_query_name_run = mysqli_query($con , $select_query_name);
+	while($category = mysqli_fetch_array($select_query_name_run)){
+	?>
 		<h2 class="l-text2 t-center">
-			
-			Motherboard
+		<?php echo $category['cat_name'];?>
 		</h2>
+		
 		<p class="m-text13 t-center">
-			Find out the most affordable board for your PC
+			Find out the most affordable <?php echo $category['cat_name'];?> for your PC
 		</p>
+
+		<?php }?>
+	
 	</section>
 	
 	<section class="bgwhite p-t-55 p-b-65">
@@ -173,11 +191,11 @@ if(isset($_POST['btn_cart'])){
 									</div>
 								</div>
 								<div class="block2-txt p-t-20">
-									<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+									<a href="product_detail.php?id=<?php echo $data['p_id'];?>&&cat_id=<?php echo $cat_id;?>" class="block2-name dis-block s-text3 p-b-5">
 										<?php echo $data['p_name'];?>
 									</a>
 									<span class="block2-price m-text6 p-r-5">
-										<?php echo $data['p_price'];?>
+										$ <?php echo $data['p_price'];?>
 									</span>
 								</div>
 							</div>
@@ -185,16 +203,13 @@ if(isset($_POST['btn_cart'])){
 						<?php }?>
 					</div>
 
-					<div class="pagination flex-m flex-w p-t-26">
-						<a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-						<a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
-					</div>
+
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<?php include("footer.html");?>
+	<?php include("footer.php");?>
 
 	<div class="btn-back-to-top bg0-hov" id="myBtn">
 		<span class="symbol-btn-back-to-top">

@@ -5,9 +5,7 @@ if(isset($_POST['loginbtn'])){
     $userpassword = $_POST['upass'];
     $resultant = mysqli_query($con , "SELECT * FROM `tbl_user` WHERE uname = '$useremail' OR email = '$useremail'");
     $row = mysqli_fetch_assoc($resultant);
-    if($useremail == "admin@gmail.com" && $userpassword == "admin@password"){
-        header('location:admin/index.html');
-    }
+
     if(mysqli_num_rows($resultant) > 0){
 
 
@@ -15,6 +13,9 @@ if(isset($_POST['loginbtn'])){
             $_SESSION['check'] = true;
             $_SESSION["id"] = $row['id'];
             $_SESSION["email"] = $row["email"];
+            $_SESSION["uname"] = $row['uname'];
+            $_SESSION["lastname"] = $row["lastname"];
+
             $_SESSION["login"] = true;
 
             header('location:index.php');
@@ -26,8 +27,8 @@ if(isset($_POST['loginbtn'])){
     else{
         echo "<script> alert('User not Registered')</script>";
     }
-}
 
+}
 ?>
 
 

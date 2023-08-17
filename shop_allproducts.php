@@ -12,7 +12,8 @@ if(isset($_POST['btn_cart'])){
 	   }
 	   else{
 	   $count = count($_SESSION['products']);
-	   $_SESSION['products'][$count] = array( "productname" => $_POST['p_name'],
+	   $_SESSION['products'][$count] = array( 
+	   "productname" => $_POST['p_name'],
 	   "productprice" => $_POST['p_price'],
 	   "productimage" => $_POST['p_image'],
 	   "productdes" => $_POST['p_description'],
@@ -22,7 +23,8 @@ if(isset($_POST['btn_cart'])){
 	   }
 	}
 	else{
-	   $_SESSION['products'][0]  = array( "productname" => $_POST['p_name'],
+	   $_SESSION['products'][0]  = array( 
+		              "productname" => $_POST['p_name'],
 					  "productprice" => $_POST['p_price'],
 					  "productimage" => $_POST['p_image'],
 					  "productdes" => $_POST['p_description'] );
@@ -39,7 +41,7 @@ if(isset($_POST['btn_cart'])){
 <html lang="en">
 
 <head>
-	<title>Product</title>
+	<title>All Products</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -140,7 +142,7 @@ if(isset($_POST['btn_cart'])){
 									</div>
 								</div>
 								<div class="block2-txt p-t-20">
-									<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+									<a href="product_detail.php?id=<?php echo $data['p_id'];?>" class="block2-name dis-block s-text3 p-b-5">
 										<?php echo $data['p_name'];?>
 									</a>
 									<span class="block2-price m-text6 p-r-5">
@@ -153,156 +155,14 @@ if(isset($_POST['btn_cart'])){
 
 					</div>
 
-					<div class="pagination flex-m flex-w p-t-26">
-						<a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-						<a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
-					</div>
+
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
-		<div class="flex-w p-b-90">
-			<div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
-				<h4 class="s-text12 p-b-30">
-					GET IN TOUCH
-				</h4>
-				<div>
-					<p class="s-text7 w-size27">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us
-						on (+1) 96 716 6879
-					</p>
-					<div class="flex-m p-t-30">
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
-					</div>
-				</div>
-			</div>
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Categories
-				</h4>
-				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Men
-						</a>
-					</li>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Women
-						</a>
-					</li>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Dresses
-						</a>
-					</li>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Sunglasses
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Links
-				</h4>
-				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Search
-						</a>
-					</li>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							About Us
-						</a>
-					</li>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Contact Us
-						</a>
-					</li>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Help
-				</h4>
-				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Track Order
-						</a>
-					</li>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
-						</a>
-					</li>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Shipping
-						</a>
-					</li>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							FAQs
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
-				<h4 class="s-text12 p-b-30">
-					Newsletter
-				</h4>
-				<form>
-					<div class="effect1 w-size9">
-						<input class="s-text7 bg6 w-full p-b-5" type="text" name="email"
-							placeholder="email@example.com">
-						<span class="effect1-line"></span>
-					</div>
-					<div class="w-size2 p-t-20">
+	<?php include("footer.php");?>
 
-						<button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
-							Subscribe
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-		<div class="t-center p-l-15 p-r-15">
-			<a href="#">
-				<img class="h-size2" src="images/icons/paypal.png" alt="IMG-PAYPAL">
-			</a>
-			<a href="#">
-				<img class="h-size2" src="images/icons/visa.png" alt="IMG-VISA">
-			</a>
-			<a href="#">
-				<img class="h-size2" src="images/icons/mastercard.png" alt="IMG-MASTERCARD">
-			</a>
-			<a href="#">
-				<img class="h-size2" src="images/icons/express.png" alt="IMG-EXPRESS">
-			</a>
-			<a href="#">
-				<img class="h-size2" src="images/icons/discover.png" alt="IMG-DISCOVER">
-			</a>
-			<div class="t-center s-text8 p-t-20">
-				Copyright © 2017 Colorlib. All rights reserved.
-			</div>
-		</div>
-	</footer>
 
 	<div class="btn-back-to-top bg0-hov" id="myBtn">
 		<span class="symbol-btn-back-to-top">
@@ -340,22 +200,6 @@ if(isset($_POST['btn_cart'])){
 	<script type="text/javascript" src="vendor/slick/slick.min.js"></script>
 	<script type="text/javascript" src="js/slick-custom.js"></script>
 
-	<script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
-	<script type="text/javascript">
-		$('.block2-btn-addcart').each(function () {
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-
-		$('.block2-btn-addwishlist').each(function () {
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to wishlist !", "success");
-			});
-		});
-	</script>
 
 	<script type="text/javascript" src="vendor/noui/nouislider.min.js"></script>
 	<script type="text/javascript">
