@@ -138,7 +138,8 @@ if(isset($_POST['btn_cart'])){
 					</div>
 				</div>
 				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-					
+
+
 					<div class="flex p-b-35">
 						<div class="search-product pos-relative bo4 of-hidden">
 							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product"
@@ -202,6 +203,7 @@ if(isset($_POST['btn_cart'])){
 						</div>
 						<?php }?>
 					</div>
+
 
 
 				</div>
