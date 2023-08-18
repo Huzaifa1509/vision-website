@@ -1,6 +1,9 @@
 <?php 
 include("connection.php");
-$select_query = "SELECT * FROM `tbl_products`";
+// session_start();
+$brand_id = $_GET['brand_id'];
+$cat_id = $_GET['cat_id'];
+$select_query = "SELECT * FROM `tbl_products` WHERE `p_cat` = $cat_id AND `p_brand` = $brand_id";
 $query_run = mysqli_query($con , $select_query);
 if(isset($_POST['btn_cart'])){
     if(isset($_SESSION['check'])){
@@ -20,19 +23,20 @@ if(isset($_POST['btn_cart'])){
 	   "productdes" => $_POST['p_description'],
 	   "producttotalprice" => 0,
 	   "productquantity" => 1  );
-       
+      
 
 	   }
 	}
 	else{
 	   $_SESSION['products'][0]  = array( 
-		"productid"=> $_POST['p_id'],
-		"productname" => $_POST['p_name'],
-		"productprice" => $_POST['p_price'],
-		"productimage" => $_POST['p_image'],
-		"producttotalprice" => 0,
-		"productdes" => $_POST['p_description'],
-		"productquantity" => 1 );
+		              "productid"=> $_POST['p_id'],
+		              "productname" => $_POST['p_name'],
+					   "productprice" => $_POST['p_price'],
+					   "productimage" => $_POST['p_image'],
+	                  "producttotalprice" => 0,
+					  "productdes" => $_POST['p_description'],
+					  "productquantity" => 1 );
+					  
 				   }
 
                 }
@@ -40,13 +44,23 @@ if(isset($_POST['btn_cart'])){
                     header('location:login.php');
                 }
 } 
+
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>All Products</title>
+	<?php
+	$select_query_name = "SELECT * FROM `tbl_products` INNER JOIN `tbl_category` ON tbl_products.p_cat = tbl_category.cat_id WHERE `p_cat` = $cat_id LIMIT 1";
+	$select_query_name_run = mysqli_query($con , $select_query_name);
+	while($category = mysqli_fetch_array($select_query_name_run)){
+	?>
+	<title><?php echo $category['cat_name'];?></title>
+	<?php }?>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -83,36 +97,77 @@ if(isset($_POST['btn_cart'])){
 
 	<?php include("nav.php");?>
 
-	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(images/other.jpg);">
+	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/other.jpg);">
+	<?php
+	$select_query_name = "SELECT * FROM `tbl_products` INNER JOIN `tbl_category` ON tbl_products.p_cat = tbl_category.cat_id WHERE `p_cat` = $cat_id LIMIT 1";
+	$select_query_name_run = mysqli_query($con , $select_query_name);
+	while($category = mysqli_fetch_array($select_query_name_run)){
+	?>
 		<h2 class="l-text2 t-center">
-			Shop
+		<?php echo $category['cat_name'];?>
 		</h2>
-	</section>
+		
+		<p class="m-text13 t-center">
+			Find out the most affordable <?php echo $category['cat_name'];?> for your PC
+		</p>
 
+		<?php }?>
+	
+	</section>
+	
 	<section class="bgwhite p-t-55 p-b-65">
 		<div class="container">
 			<div class="row">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+					<div class="leftbar p-r-20 p-r-0-sm">
+						
+						<h4 class="m-text14 p-b-7">
+							Categories
+						</h4>
+						<ul class="p-b-54">
+							<li class="p-t-4">
+								<a href="shop_allproducts.php" class="s-text13 active1">
+									All
+								</a>
+							</li>
+							<?php $select_cat = "SELECT * FROM `tbl_category`";
+							$select_cat_run = mysqli_query($con , $select_cat);
+							while($category = mysqli_fetch_array($select_cat_run)){?>
+							<li class="p-t-4">
+								<a href="products.php?id=<?php echo $category['cat_id']?>" class="s-text13">
+									<?php echo $category['cat_name']?>
+								</a>
+							</li>
+							<?php }?>
 
-				<div class="col-sm-12 col-md-8 col-lg-12 p-b-100">
+						</ul>
+						<h4 class="m-text14 p-b-7">
+							Brands
+						</h4>
+						<ul class="p-b-54">
+							<?php $select_cat = "SELECT * FROM `tbl_brand`";
+							$select_cat_run = mysqli_query($con , $select_cat);
+							while($category = mysqli_fetch_array($select_cat_run)){?>
+							<li class="p-t-4">
+								<a href="brandproducts.php?brand_id=<?php echo $category['brand_id']?>&&cat_id=<?php echo $cat_id;?>" class="s-text13">
+									<?php echo $category['brand_name']?>
+								</a>
+							</li>
+							<?php }?>
 
-					<div class="flex p-b-35">
-						<div class="search-product pos-relative bo4 of-hidden">
-							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product"
-								placeholder="Search Products..." onkeyup="functionsearch()" id="search">
-							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
-							</button>
-						</div>
+						</ul>
+
+
 					</div>
-                     <div class="row" id="show"></div>
-					<div class="row" id="hide">
-					<?php while($data = mysqli_fetch_array($query_run)){
-						$cat_id = $data['p_cat'];?>
+				</div>
+				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+					<div class="row">
+						<?php while($data = mysqli_fetch_array($query_run)){?>
 						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
 
 							<div class="block2">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-									<img src="<?php echo 'admin/img/' . $data['p_img'];?>" alt="IMG-PRODUCT" style="height:300px;">
+									<img src="<?php echo 'admin/img/' . $data['p_img'];?>" alt="IMG-PRODUCT" style="height:250px;">
 									<div class="block2-overlay trans-0-4">
 										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
 											<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
@@ -121,8 +176,7 @@ if(isset($_POST['btn_cart'])){
 										<div class="block2-btn-addcart w-size1 trans-0-4">
 
 											<form method="post">
-
-											    <input type="hidden" name="p_id"
+											<input type="hidden" name="p_id"
 													value="<?php echo $data['p_id'];?>">
 
 												<input type="hidden" name="p_price"
@@ -155,14 +209,14 @@ if(isset($_POST['btn_cart'])){
 										<?php echo $data['p_name'];?>
 									</a>
 									<span class="block2-price m-text6 p-r-5">
-										<?php echo "$ " .$data['p_price'];?>
+										$ <?php echo $data['p_price'];?>
 									</span>
 								</div>
 							</div>
 						</div>
 						<?php }?>
-
 					</div>
+
 
 
 				</div>
@@ -171,7 +225,6 @@ if(isset($_POST['btn_cart'])){
 	</section>
 
 	<?php include("footer.php");?>
-
 
 	<div class="btn-back-to-top bg0-hov" id="myBtn">
 		<span class="symbol-btn-back-to-top">
@@ -210,6 +263,7 @@ if(isset($_POST['btn_cart'])){
 	<script type="text/javascript" src="js/slick-custom.js"></script>
 
 
+
 	<script type="text/javascript" src="vendor/noui/nouislider.min.js"></script>
 	<script type="text/javascript">
 		/*[ No ui ]
@@ -243,30 +297,9 @@ if(isset($_POST['btn_cart'])){
 		crossorigin="anonymous"></script>
 
 		<script>
-			
-      function functionsearch() {
-        $("#hide").hide();
-       var word =  $("#search").val();
-      $.ajax({
-        url: "searchallproduct.php",
-        type: "POST",
-        data: {
-          search_word: word,
-        },
-        // cache: false,
-        success: function(Result) {
 
-
-          $("#show").html(Result);
-
-
-        }
-      });
-
-    }
   
-
-		</script>
+</script>
 </body>
 
 </html>

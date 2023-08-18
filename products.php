@@ -21,7 +21,6 @@ if(isset($_POST['btn_cart'])){
 	   "productimage" => $_POST['p_image'],
 	   "productdes" => $_POST['p_description'],
 	   "producttotalprice" => 0,
-
 	   "productquantity" => 1  );
       
 
@@ -29,12 +28,13 @@ if(isset($_POST['btn_cart'])){
 	}
 	else{
 	   $_SESSION['products'][0]  = array( 
-		"productid"=> $_POST['p_id'],
+		              "productid"=> $_POST['p_id'],
 		              "productname" => $_POST['p_name'],
-					  "productprice" => $_POST['p_price'],
-					  "productimage" => $_POST['p_image'],
-	   "producttotalprice" => 0,
-					  "productdes" => $_POST['p_description'] );
+					   "productprice" => $_POST['p_price'],
+					   "productimage" => $_POST['p_image'],
+	                  "producttotalprice" => 0,
+					  "productdes" => $_POST['p_description'],
+					  "productquantity" => 1 );
 					  
 				   }
 
@@ -140,6 +140,21 @@ if(isset($_POST['btn_cart'])){
 							<?php }?>
 
 						</ul>
+						<h4 class="m-text14 p-b-7">
+							Brands
+						</h4>
+						<ul class="p-b-54">
+							<?php $select_cat = "SELECT * FROM `tbl_brand`";
+							$select_cat_run = mysqli_query($con , $select_cat);
+							while($category = mysqli_fetch_array($select_cat_run)){?>
+							<li class="p-t-4">
+								<a href="brandproducts.php?brand_id=<?php echo $category['brand_id']?>&&cat_id=<?php echo $cat_id;?>" class="s-text13">
+									<?php echo $category['brand_name']?>
+								</a>
+							</li>
+							<?php }?>
+
+						</ul>
 
 
 					</div>
@@ -150,13 +165,14 @@ if(isset($_POST['btn_cart'])){
 					<div class="flex p-b-35">
 						<div class="search-product pos-relative bo4 of-hidden">
 							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product"
-								placeholder="Search Products...">
+								placeholder="Search Products..." id="search" onkeyup="functionsearch()">
+								<input type="hidden" value="<?php echo $cat_id;?>" id="cat_id">
 							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
 								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
 							</button>
 						</div>
 					</div>
-					<div class="row" id="fetch_search_data"></div>
+					<div class="row" id="show"></div>
 					<div class="row" id="hide">
 						<?php while($data = mysqli_fetch_array($query_run)){?>
 						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
@@ -295,7 +311,34 @@ if(isset($_POST['btn_cart'])){
 		<script>
 
   
-</script>	
+</script>
+<script>
+			
+			function functionsearch() {
+			  $("#hide").hide();
+			 var word =  $("#search").val();
+			 var category = $("#cat_id").val();
+			$.ajax({
+			  url: "searchproduct.php",
+			  type: "POST",
+			  data: {
+				search_word: word,
+				search_cat: category,
+			  },
+			  // cache: false,
+			  success: function(Result) {
+	  
+	  
+				$("#show").html(Result);
+	  
+	  
+			  }
+			});
+	  
+		  }
+		
+	  
+			  </script>	
 
 	
 </body>

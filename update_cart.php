@@ -2,7 +2,7 @@
 // include('connection.php');
 session_start();
 $totalsumglobal = 0;
-$sum = 0;
+
 // make sure previous value has been deleted // <--- not needed
 // unset($_SESSION['products']);
 if(isset($_POST['update_cart'])){
