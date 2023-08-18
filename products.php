@@ -1,5 +1,6 @@
 <?php 
 include("connection.php");
+// session_start();
 $cat_id = $_GET['id'];
 $select_query = "SELECT * FROM `tbl_products` WHERE `p_cat` = $cat_id ";
 $query_run = mysqli_query($con , $select_query);
@@ -13,11 +14,14 @@ if(isset($_POST['btn_cart'])){
 	   }
 	   else{
 	   $count = count($_SESSION['products']);
-	   $_SESSION['products'][$count] = array( 
+	   $_SESSION['products'][$count] = array(
+		"productid"=> $_POST['p_id'],
 	   "productname" => $_POST['p_name'],
 	   "productprice" => $_POST['p_price'],
 	   "productimage" => $_POST['p_image'],
 	   "productdes" => $_POST['p_description'],
+	   "producttotalprice" => 0,
+
 	   "productquantity" => 1  );
       
 
@@ -25,10 +29,13 @@ if(isset($_POST['btn_cart'])){
 	}
 	else{
 	   $_SESSION['products'][0]  = array( 
+		"productid"=> $_POST['p_id'],
 		              "productname" => $_POST['p_name'],
 					  "productprice" => $_POST['p_price'],
 					  "productimage" => $_POST['p_image'],
+	   "producttotalprice" => 0,
 					  "productdes" => $_POST['p_description'] );
+					  
 				   }
 
                 }
@@ -165,6 +172,8 @@ if(isset($_POST['btn_cart'])){
 										<div class="block2-btn-addcart w-size1 trans-0-4">
 
 											<form method="post">
+											<input type="hidden" name="p_id"
+													value="<?php echo $data['p_id'];?>">
 
 												<input type="hidden" name="p_price"
 													value="<?php echo $data['p_price'];?>">

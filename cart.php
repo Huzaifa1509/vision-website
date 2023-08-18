@@ -64,9 +64,13 @@
 							<th class="column-5">Total</th>
 							<th class="column-1"></th>
 						</tr>
-						<?php foreach($_SESSION['products'] as $key => $value){?>
+						<?php foreach($_SESSION['products'] as $key => $value){
+							// $updated_qty = 
+							?>
+							
 						<tr class="table-row">
 							<td class="column-1">
+							<?php echo $value['productid'];?>
 								<div class="cart-img-product b-rad-4 o-f-hidden me-5">
 									<img src="<?php echo  $value['productimage']?>" alt="IMG-PRODUCT" style="height: 80px; width:100%;">
 								</div>
@@ -76,27 +80,35 @@
 										<?php echo $value['productname'];?>
 									
 							</td>
-							<td class="column-3">$
+							<td class="column-3" >$
 								<?php echo $value['productprice'];?>.00
 							</td>
 							<td class="column-4">
 								<div class="flex-w bo5 of-hidden w-size17">
-									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+								<!-- btn-num-product-down  btn-num-product-up-->
+								
+									<button type="button" class=" color1 flex-c-m size7 bg8 eff2" onclick="btnDec(<?php echo $value['productid']  ?> , <?php echo $value['productprice'];?>)">
 										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
 									</button>
-									<input class="size8 m-text18 t-center num-product" type="number" name="num-product1"
-										value="1">
-									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+									<input min="1" id="ID_qty<?php echo $value['productid'];?>" class="size8 m-text18 t-center num-product" type="number" name="update_qty"
+										value="<?php echo $value['productquantity'];?>">
+										
+									<button type="button" class=" color1 flex-c-m size7 bg8 eff2" onclick="btnInc(<?php echo $value['productid']  ?> , <?php echo $value['productprice'];?>)">
 										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
 									</button>
+						
 								</div>
 							</td>
-							<td class="column-5">$36.00</td>
+							<td class="column-5" id="ID_price<?php echo $value['productid'];?>"><?php echo  $value['producttotalprice']; ?></td>
 							<td class="column-5">
+							
 								<form action="delete_element.php" method="post">
 									<input type="hidden" name="item_name" value="<?php echo $value['productname'];?>">
 								<button class="btn btn-outline-danger" type="submit" ><i class="fa-solid fa-xmark fa-lg"></i>&nbsp; Delete from Cart</button>
 								</form>
+
+
+
 
 
 </td>
@@ -119,11 +131,18 @@
 					</div>
 				</div>
 				<div class="size10 trans-0-4 m-t-10 m-b-10">
-					<form action="" method="post">
-						<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-1">
-							Update Cart
-						</button>
-					</form>
+					<!-- <form action="" method="post"> -->
+				
+						<input type="button" onclick="btnUpdateCart()"  value="Update" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-1">
+						<script>
+							// function btnUpdateCart(){
+							// 	alert(this.p_id)
+							// 	// $.ajax({
+
+							// 	// })
+							// }
+						</script>
+					<!-- </form> -->
 				</div>
 			</div>
 
@@ -137,7 +156,8 @@
 						Subtotal:
 					</span>
 					<span class="m-text21 w-size20 w-full-sm">
-						$39.00
+				RS	<?php echo  $GLOBALS['totalsum']; ?>
+
 					</span>
 				</div>
 				<div class="flex-w flex-sb-m p-b-12">
@@ -154,8 +174,8 @@
 					<span class="m-text22 w-size19 w-full-sm">
 						Total:
 					</span>
-					<span class="m-text21 w-size20 w-full-sm">
-						$39.00
+					<span id="ID_totalsum" class="m-text21 w-size20 w-full-sm">
+					RS <?php echo  $GLOBALS['totalsum']; ?>
 					</span>
 				</div>
 				<div class="size15 trans-0-4">
@@ -180,10 +200,76 @@
 
 	<div id="dropDownSelect1"></div>
 	<div id="dropDownSelect2"></div>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	
+	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<script>
+	// this.p_id = 1
+	function btnDec(id , price){
+		// alert(price)
+		this.p_id = id;
+		var Id_qty = document.getElementById('ID_qty'+ id);
+		var ID_price = document.getElementById('ID_price' + id);
+		if(Id_qty.value > 1)
+		Id_qty.value--;
+		ID_price.innerHTML = Id_qty.value * price;
+		debugger
+	
+		$.ajax({
+			type:'POST',
+			url: 'update_cart.php',
+			data :{
+				update_cart : 'update_cart',
+				p_id : id,
+				p_price : price,
+				p_qty :Id_qty.value
+			},
+			success: function (data){
+				
+					// alert(data);
+				
+			},
+			async: false 
+
+		})
+	}
+	function btnInc(id,price){
+		// alert(price)
+		this.p_id = id;
+		var Id_qty = document.getElementById('ID_qty'+ id);
+		var ID_price = document.getElementById('ID_price' + id);
+		if(Id_qty.value >= 1)
+		Id_qty.value++;
+		debugger
+		ID_price.innerHTML = Id_qty.value * price;
+		debugger
+		$.ajax({
+			type:'POST',
+			url: 'update_cart.php',
+			data :{
+				update_cart : 'update_cart',
+				p_id : id,
+				p_price : price,
+				p_qty :Id_qty.value
+			},
+			success: function (data){
+				// alert(data);
+				
+			// document.getElementById("ID_totalsum").innerHTML = data;
+				
+			},
+			async: false 
+		})
+
+	}
+</script>
+	
+	
+	
 	<script src="https://kit.fontawesome.com/9e29d9e7e1.js" crossorigin="anonymous"></script>
 	<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	
 
 	<script type="text/javascript" src="vendor/animsition/js/animsition.min.js"></script>
 
