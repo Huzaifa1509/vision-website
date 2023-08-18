@@ -70,7 +70,7 @@
 							
 						<tr class="table-row">
 							<td class="column-1">
-							<?php echo $value['productid'];?>
+
 								<div class="cart-img-product b-rad-4 o-f-hidden me-5">
 									<img src="<?php echo  $value['productimage']?>" alt="IMG-PRODUCT" style="height: 80px; width:100%;">
 								</div>
@@ -99,7 +99,14 @@
 						
 								</div>
 							</td>
-							<td class="column-5" id="ID_price<?php echo $value['productid'];?>"><?php echo  $value['producttotalprice']; ?></td>
+							<td class="column-5" id="ID_price<?php echo $value['productid'];?>">
+							<?php if($value['producttotalprice'] == 0){
+								echo $value['productprice'];
+							}else{
+								echo  $value['producttotalprice'];
+							}
+								?>
+							</td>
 							<td class="column-5">
 							
 								<form action="delete_element.php" method="post">
@@ -131,18 +138,10 @@
 					</div>
 				</div>
 				<div class="size10 trans-0-4 m-t-10 m-b-10">
-					<!-- <form action="" method="post"> -->
-				
-						<input type="button" onclick="btnUpdateCart()"  value="Update" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-1">
-						<script>
-							// function btnUpdateCart(){
-							// 	alert(this.p_id)
-							// 	// $.ajax({
 
-							// 	// })
-							// }
-						</script>
-					<!-- </form> -->
+				
+						<a href="cart.php" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-1">Update</a>
+					
 				</div>
 			</div>
 
@@ -263,6 +262,7 @@
 		})
 
 	}
+
 </script>
 	
 	

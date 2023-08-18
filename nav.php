@@ -71,6 +71,7 @@
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
                             <?php 
+                            $totalsumof1 = 0;
                             $totalsum = 0;
                             if(empty($_SESSION['products']))
                             { echo "<h5>Your Cart is Empty!</h5>";
@@ -79,8 +80,9 @@
                             else{
                                 
                                 foreach($_SESSION['products'] as $key => $value){
-                                    // $totalsum += $value['productprice'];
-                                    $totalsum =  $value['producttotalprice'];
+                                    $totalsumof1 += $value['productprice'];
+                                    $totalsum +=  $value['producttotalprice'];
+
                                     ?>
                             <li class="header-cart-item">
                                 <div class="header-cart-item-img">
@@ -92,7 +94,7 @@
                                     </p>
                                     <span class="header-cart-item-info">
                                         $
-                                        <?php echo $value['producttotalprice'];?>
+                                        <?php echo $value['productprice'];?>
                                         .00
                                     </span>
                                 </div>
@@ -103,7 +105,7 @@
 
 
                             Total: $
-                            <?php echo $totalsum;?>
+                            <?php echo $totalsumof1;?>
                         </div>
                         <div class="header-cart-buttons">
                             <div class="header-cart-wrapbtn">
