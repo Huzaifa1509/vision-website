@@ -226,14 +226,14 @@
                     <a href="index.php">Home</a>
                 </li>
                 <li class="item-menu-mobile">
-                    <a href="shop_allproducts.php">Shop</a>
+                    <a href="index.php#cat">Categories</a>
                 </li>
                 <li class="item-menu-mobile sale-noti">
-                    <a href="product.html">Sale</a>
+                    <a href="shop_allproducts.php">Shop</a>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="blog.html">Blog</a>
+                    <a href="cart.php">Cart</a>
                 </li>
 
                 <li class="item-menu-mobile">

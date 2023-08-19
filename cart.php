@@ -14,6 +14,8 @@ if (isset($_POST['btn_checkout'])) {
     $date = date("Y-m-d-H-s");
     $email = $_SESSION['email'];
 	$lname = $_SESSION['uname']. " " .$_SESSION['lastname'];
+	$totalprice = $_POST['totalprice'];
+
 
     $query_i_order = "INSERT INTO `tbl_order`(`o_date`, `u_id`,`address`) VALUES ('$date','$user_id' , '$address')";
     $query_i_order_run = mysqli_query($con,$query_i_order);
@@ -55,7 +57,7 @@ try {
 
     
 
-    $body = "<p>Hello <b>" . $lname . "!</b></p><br><p><b>Call: +923362100225</b></p><h4>Your Total Amount Of Order:  Rs </h4><br><br><p>Best Regards,<br>
+    $body = "<p>Hello <b>" . $lname . "!</b></p><br><p><b>Call: +923362100225</b></p><h4>Your Total Amount Of Order:  Rs". $totalprice  ." </h4><br><br><p>Best Regards,<br>
      <b>FuseTech</b></p><h1>Thanks For Shopping</h1>";
 
     //Content
@@ -303,6 +305,7 @@ try {
 					<span class="m-text22 w-size19 w-full-sm">
 						Total:
 					</span>
+
 					<span id="ID_totalsum" class="m-text21 w-size20 w-full-sm">
 					RS <?php 
 					if($GLOBALS['totalsum'] == 0){
@@ -319,6 +322,13 @@ try {
 						Address:
 					</span>
 					<textarea class="form-control form-control-user" name="address" cols="" rows="2" placeholder="Enter Your Correct Address...." required></textarea><br>
+					<input type="hidden" name="totalprice" value="
+					<?php 
+					if($GLOBALS['totalsum'] == 0){
+					echo  $GLOBALS['totalsumof1']; }
+					else{
+					echo  $GLOBALS['totalsum'];
+					}?>">
 					<button type="submit" name="btn_checkout" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-2">
 						Proceed to Checkout
 					</button>
