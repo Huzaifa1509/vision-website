@@ -1,4 +1,83 @@
-<?php include("connection.php");?>
+<?php include("connection.php");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
+
+$mail = new PHPMailer(true);
+
+if (isset($_POST['btn_checkout'])) {
+   $user_id = $_SESSION["id"];
+   $address = $_POST['address'];
+    $date = date("Y-m-d-H-s");
+    $email = $_SESSION['email'];
+	$lname = $_SESSION['uname']. " " .$_SESSION['lastname'];
+
+    $query_i_order = "INSERT INTO `tbl_order`(`o_date`, `u_id`,`address`) VALUES ('$date','$user_id' , '$address')";
+    $query_i_order_run = mysqli_query($con,$query_i_order);
+    $last_row = mysqli_insert_id($con);
+    //   echo $last_row;
+    foreach($_SESSION['products'] as $value){
+     $p_name =   $value['productname'];
+     $p_price =   $value['productprice'];
+	 $p_quantity = $value['productquantity'];
+    
+
+    $query_i_items = "INSERT INTO `tbl_checkout`(`p_price`, `p_name`, `p_qty`, `o_id`) VALUES ('$p_price','$p_name','$p_quantity','$last_row')";
+    $query_i_items_run = mysqli_query($con,$query_i_items);
+    if ($query_i_items_run) {
+
+        unset($_SESSION['products']);
+    }
+
+    
+}
+try {
+    //Server settings
+    // $mail->SMTPDebug = 2; //Enable verbose debug output
+    $mail->isSMTP(); //Send using SMTP
+    // $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+    $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+    $mail->SMTPAuth = true; //Enable SMTP authentication
+    $mail->Username = 'huzaifairfan2144@gmail.com'; //SMTP username
+    $mail->Password = 'vsxltzenjsgoezjh'; //SMTP password
+    // $mail->Password = 'admin_sarim_786$$$@';
+    $mail->SMTPSecure = 'ssl'; //Enable implicit TLS encryption
+    $mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+
+
+    //Recipients
+    $mail->setFrom('huzaifairfan2144@gmail.com', 'FuseTech');
+    $mail->addAddress($email , $lname); //Add a recipient
+
+    
+
+    $body = "<p>Hello <b>" . $lname . "!</b></p><br><p><b>Call: +923362100225</b></p><h4>Your Total Amount Of Order:  Rs </h4><br><br><p>Best Regards,<br>
+     <b>FuseTech</b></p><h1>Thanks For Shopping</h1>";
+
+    //Content
+    $mail->isHTML(true);
+    $mail->Subject = 'Order Details | FuseTech';
+    $mail->Body = $body;
+    $mail->AltBody = strip_tags($body);
+
+    $mail->send();
+  
+	
+	
+	echo "<script>alert('Order Placed! Thanks for Purchasing :)')</script>";
+	header('location:index.php');
+    exit();
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+    }
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,14 +111,55 @@
 
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+<style>
+	.loader {
+  border: 6px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 6px solid #3498db;
+  border-right: 6px solid green;
+   border-bottom: 6px solid red;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
 
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.Cl_OuterLoader{
+	background: #000000a3;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	overflow:hidden;
+}
+#ID_Loader{
+	display: none;
+}
+</style>
 
 </head>
 
 <body class="animsition">
 
 	<?php include("nav.php");?>
-
+	<div class="Cl_OuterLoader" id="ID_Loader">
+	<div class="loader" ></div>
+</div>
 	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(images/other.jpg);">
 		<h2 class="l-text2 t-center">
 			Cart
@@ -80,8 +200,8 @@
 										<?php echo $value['productname'];?>
 									
 							</td>
-							<td class="column-3" >$
-								<?php echo $value['productprice'];?>.00
+							<td class="column-3" >RS. 
+								<?php echo $value['productprice'];?>
 							</td>
 							<td class="column-4">
 								<div class="flex-w bo5 of-hidden w-size17">
@@ -99,7 +219,7 @@
 						
 								</div>
 							</td>
-							<td class="column-5" id="ID_price<?php echo $value['productid'];?>">
+							<td class="column-5" id="ID_price<?php echo $value['productid'];?>">RS. 
 							<?php if($value['producttotalprice'] == 0){
 								echo $value['productprice'];
 							}else{
@@ -138,9 +258,14 @@
 					</div>
 				</div>
 				<div class="size10 trans-0-4 m-t-10 m-b-10">
+					<form action="">
 
+						<button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-1" onclick="btnUpdate()">
+							Update
+						</button>
+					</form>
 				
-						<a href="cart.php" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-1">Update</a>
+						
 					
 				</div>
 			</div>
@@ -155,7 +280,12 @@
 						Subtotal:
 					</span>
 					<span class="m-text21 w-size20 w-full-sm">
-				RS	<?php echo  $GLOBALS['totalsum']; ?>
+				RS	<?php 
+					if($GLOBALS['totalsum'] == 0){
+					echo  $GLOBALS['totalsumof1']; }
+					else{
+					echo  $GLOBALS['totalsum'];
+					}?>
 
 					</span>
 				</div>
@@ -174,14 +304,25 @@
 						Total:
 					</span>
 					<span id="ID_totalsum" class="m-text21 w-size20 w-full-sm">
-					RS <?php echo  $GLOBALS['totalsum']; ?>
+					RS <?php 
+					if($GLOBALS['totalsum'] == 0){
+					echo  $GLOBALS['totalsumof1']; }
+					else{
+					echo  $GLOBALS['totalsum'];
+					}?>
 					</span>
 				</div>
 				<div class="size15 trans-0-4">
+                  <form  method="post">
 
-					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+				  <span class="m-text22 w-size19 w-full-sm">
+						Address:
+					</span>
+					<textarea class="form-control form-control-user" name="address" cols="" rows="2" placeholder="Enter Your Correct Address...." required></textarea><br>
+					<button type="submit" name="btn_checkout" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-2">
 						Proceed to Checkout
 					</button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -202,7 +343,7 @@
 	
 	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-	
+
 	<script>
 	// this.p_id = 1
 	function btnDec(id , price){

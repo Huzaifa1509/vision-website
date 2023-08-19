@@ -115,7 +115,7 @@
 	<section class="banner bgwhite p-t-40 p-b-40">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+				<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto" id="cat">
 
 					<div class="block1 hov-img-zoom pos-relative m-b-30">
 						<img src="images/pexels-athena-2582937.jpg" alt="IMG-BENNER">
@@ -264,34 +264,25 @@
 			<div class="row">
 				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
 					<div class="hov-img-zoom pos-relative">
-						<img src="images/banner-08.jpg" alt="IMG-BANNER">
+						<img src="images/pc.jpg" alt="IMG-BANNER" style="height: 430px;">
 						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
 							<span class="m-text9 p-t-45 fs-20-sm">
-								The Beauty
+								New Items
 							</span>
-							<h3 class="l-text1 fs-35-sm">
-								Lookbook
-							</h3>
-							<a href="#" class="s-text4 hov2 p-t-20 ">
-								View Collection
+							<a href="shop_allproducts.php" class="s-text4 hov2 p-t-20 ">
+								View All Products
 							</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
 					<div class="bgwhite hov-img-zoom pos-relative p-b-20per-ssm">
-						<img src="images/shop-item-09.jpg" alt="IMG-BANNER">
+						<img src="images/otherproduct.png" alt="IMG-BANNER" style="height: 430px;">
 						<div class="ab-t-l sizefull flex-col-c-b p-l-15 p-r-15 p-b-20">
 							<div class="t-center">
-								<a href="product_detail.php" class="dis-block s-text3 p-b-5">
-									Gafas sol Hawkers one
+								<a href="products.php?id=6" class="dis-block s-text3 p-b-5">
+									Others Components
 								</a>
-								<span class="block2-oldprice m-text7 p-r-5">
-									$29.50
-								</span>
-								<span class="block2-newprice m-text8">
-									$15.90
-								</span>
 							</div>
 							<div class="flex-c-m p-t-44 p-t-30-xl">
 								<div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">

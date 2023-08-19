@@ -17,14 +17,14 @@
                             <a href="index.php">Home</a>
                         </li>
                         <li>
-                            <a href="shop_allproducts.php">Shop</a>
+                            <a href="index.php#cat">Categories</a>
                         </li>
                         <li class="sale-noti">
-                            <a href="product.html">Sale</a>
+                            <a href="shop_allproducts.php">Shop</a>
                         </li>
-
+                            
                         <li>
-                            <a href="blog.html">Blog</a>
+                            <a href="cart.php">Cart</a>
                         </li>
 
                         <li>

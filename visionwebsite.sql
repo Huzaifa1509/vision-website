@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2023 at 11:59 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Aug 19, 2023 at 01:49 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -82,6 +82,98 @@ INSERT INTO `tbl_category` (`cat_id`, `cat_name`, `brand`) VALUES
 (3, 'GPU', 1),
 (4, 'Processor', 1),
 (6, 'Others', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_checkout`
+--
+
+CREATE TABLE `tbl_checkout` (
+  `p_price` int(100) NOT NULL,
+  `p_name` varchar(100) NOT NULL,
+  `p_qty` int(100) NOT NULL,
+  `o_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_checkout`
+--
+
+INSERT INTO `tbl_checkout` (`p_price`, `p_name`, `p_qty`, `o_id`) VALUES
+(12000, 'ASUS 4070Ti', 8, 1),
+(15000, 'ROG Strix Gaming', 2, 1),
+(14999, 'MSI B550M PRO-VDH WIFI.', 1, 3),
+(16999, 'Biostar B450M Motherboard', 1, 3),
+(11999, 'ASUS Z97-P Motherboard', 1, 3),
+(13999, 'ASUS B560M-Plus Motherboard', 1, 3),
+(7800, 'RX 7900 RADEON', 5, 4),
+(12000, 'ASUS 4070Ti', 8, 4),
+(15000, 'ROG Strix Gaming', 4, 4),
+(14999, 'MSI B550M PRO-VDH WIFI.', 9, 5),
+(14999, 'MSI B550M PRO-VDH WIFI.', 9, 6),
+(14999, 'MSI B550M PRO-VDH WIFI.', 9, 7),
+(14999, 'MSI B550M PRO-VDH WIFI.', 9, 8),
+(16999, 'Biostar B450M Motherboard', 10, 8),
+(11999, 'ASUS Z97-P Motherboard', 6, 8),
+(13999, 'ASUS B560M-Plus Motherboard', 8, 8),
+(7800, 'RX 7900 RADEON', 2, 9),
+(12000, 'ASUS 4070Ti', 2, 9),
+(7800, 'RX 7900 RADEON', 1, 10),
+(12000, 'ASUS 4070Ti', 1, 10),
+(15000, 'ROG Strix Gaming', 1, 10),
+(900, 'Gaming Keyboard', 10, 11),
+(7800, 'RX 7900 RADEON', 2, 12),
+(12000, 'ASUS 4070Ti', 2, 12),
+(15000, 'ROG Strix Gaming', 2, 12),
+(7800, 'RX 7900 RADEON', 1, 13),
+(12000, 'ASUS 4070Ti', 1, 13),
+(16999, 'Biostar B450M Motherboard', 1, 14),
+(11999, 'ASUS Z97-P Motherboard', 1, 14),
+(16999, 'Biostar B450M Motherboard', 2, 15),
+(11999, 'ASUS Z97-P Motherboard', 2, 15),
+(14999, 'MSI B550M PRO-VDH WIFI.', 2, 15),
+(4999, 'G.SKILL Trident Z RGB Memory', 1, 16),
+(7800, 'ROG Certified RAM', 1, 16),
+(6999, 'ROG Strix RAM', 1, 16),
+(7800, 'RX 7900 RADEON', 1, 17),
+(5900, 'Asus Gaming Processor', 1, 17),
+(5600, 'G.SKILL Trident Z Memory', 1, 17);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_order`
+--
+
+CREATE TABLE `tbl_order` (
+  `o_id` int(11) NOT NULL,
+  `o_date` date NOT NULL,
+  `u_id` int(11) NOT NULL,
+  `address` varchar(5000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_order`
+--
+
+INSERT INTO `tbl_order` (`o_id`, `o_date`, `u_id`, `address`) VALUES
+(1, '2023-08-19', 1, ''),
+(3, '2023-08-19', 1, ''),
+(4, '2023-08-19', 1, ''),
+(5, '2023-08-19', 1, ''),
+(6, '2023-08-19', 1, ''),
+(7, '2023-08-19', 1, ''),
+(8, '2023-08-19', 1, ''),
+(9, '2023-08-19', 1, ''),
+(10, '2023-08-19', 1, ''),
+(11, '2023-08-19', 1, ''),
+(12, '2023-08-19', 1, ''),
+(13, '2023-08-19', 1, ''),
+(14, '2023-08-19', 1, '1D 3/3 Nazimabad, Karachi'),
+(15, '2023-08-19', 1, 'fsdfsdfwefwerw4t4rt'),
+(16, '2023-08-19', 1, 'hyjkjkfghj'),
+(17, '2023-08-19', 1, 'fgfdgfdgdfhgfjghukiuyo');
 
 -- --------------------------------------------------------
 
@@ -196,6 +288,19 @@ ALTER TABLE `tbl_category`
   ADD KEY `brand` (`brand`);
 
 --
+-- Indexes for table `tbl_checkout`
+--
+ALTER TABLE `tbl_checkout`
+  ADD KEY `o_id` (`o_id`);
+
+--
+-- Indexes for table `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  ADD PRIMARY KEY (`o_id`),
+  ADD KEY `fk_2` (`u_id`);
+
+--
 -- Indexes for table `tbl_products`
 --
 ALTER TABLE `tbl_products`
@@ -238,6 +343,12 @@ ALTER TABLE `tbl_category`
   MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  MODIFY `o_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `tbl_products`
 --
 ALTER TABLE `tbl_products`
@@ -264,6 +375,18 @@ ALTER TABLE `tbl_usercontact`
 --
 ALTER TABLE `tbl_category`
   ADD CONSTRAINT `tbl_category_ibfk_1` FOREIGN KEY (`brand`) REFERENCES `tbl_brand` (`brand_id`);
+
+--
+-- Constraints for table `tbl_checkout`
+--
+ALTER TABLE `tbl_checkout`
+  ADD CONSTRAINT `tbl_checkout_ibfk_1` FOREIGN KEY (`o_id`) REFERENCES `tbl_order` (`o_id`);
+
+--
+-- Constraints for table `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  ADD CONSTRAINT `fk_2` FOREIGN KEY (`u_id`) REFERENCES `tbl_user` (`id`);
 
 --
 -- Constraints for table `tbl_products`

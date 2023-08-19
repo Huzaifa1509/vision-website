@@ -31,6 +31,7 @@ if(isset($_POST['update_cart'])){
    }
    session_write_close();
    echo $totalsumglobal;
+  
 // print_r($_SESSION['products']);
 //    exit();
    //    $sum = $totalsumglobal;
