@@ -6,7 +6,7 @@
 
         <div class="wrap_header">
 
-            <a href="index.html" class="logo">
+            <a href="index.php" class="logo">
                 <img src="images/icons/web-logo.png" alt="IMG-LOGO">
             </a>
 
@@ -17,10 +17,10 @@
                             <a href="index.php">Home</a>
                         </li>
                         <li>
-                            <a href="index.php#cat">Categories</a>
+                            <a href="shop_allproducts.php">Shop</a>
                         </li>
                         <li class="sale-noti">
-                            <a href="shop_allproducts.php">Shop</a>
+                            <a href="customize.php">Built PC</a>
                         </li>
                             
                         <li>
@@ -129,7 +129,7 @@
 
     <div class="wrap_header_mobile">
 
-        <a href="index.html" class="logo-mobile">
+        <a href="index.php" class="logo-mobile">
             <img src="images/icons/web-logo.png" alt="IMG-LOGO">
         </a>
 
@@ -225,11 +225,11 @@
                 <li class="item-menu-mobile">
                     <a href="index.php">Home</a>
                 </li>
-                <li class="item-menu-mobile">
-                    <a href="index.php#cat">Categories</a>
+                <li class="item-menu-mobile ">
+                    <a href="shop_allproducts.php">Shop</a>
                 </li>
                 <li class="item-menu-mobile sale-noti">
-                    <a href="shop_allproducts.php">Shop</a>
+                    <a href="customize.php">Built PC</a>
                 </li>
 
                 <li class="item-menu-mobile">

@@ -1,4 +1,7 @@
-<?php include("connection.php");?>
+<?php include("connection.php");
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -49,7 +52,9 @@
   }
 </style>
 
-<body class="animsition">
+<!-- <body class="animsition"> -->
+  <body>
+
 
   <?php include("nav.php");?>
 
@@ -60,252 +65,37 @@
   </section>
 
   <div class="container-fluid">
-    <div class="row mt-5">
+    <div class="row mt-5" id="ID_cartList">
+
+
       <!-- product image -->
-      <div class="col-sm-4 mt-5">
-        <div class="text-center" data-aos="fade-right"><img src="images/azza-mp_main-min_18.jpg" alt="pics"
-            height="100%" width="100%"></div>
 
-      </div>
-      <!-- product specs -->
-      <div class="col-sm-5 mt-5">
-        <div class="mt-5" data-aos="fade-up">
-          <h1 class="title">Product Specifications</h1>
-          <h5 class="title">Product Description</h5>
-          <p class="text">With supporting text below as a natural lead-in to additional content. Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Eos quis culpa nam ex optio, aliquam cumque est harum, omnis cum nostrum
-            deleniti minima facilis ab quam modi, reprehenderit fuga. Nihil.</p>
-          <a href="#" class="btn btn-secondary">Add to Cart</a>
-          <a href="#" class="btn btn-dark">Buy Now</a>
-
-        </div>
-      </div>
-      <!-- products selected by user to add -->
-      <div class="col-sm-3 comp mt-5">
-        <h4 class="title text-center">Components</h4>
-        <hr>
-        <div class="scroll d-flex row text-center" data-aos="zoom-in">
-          <div class="col-6 cb">
-            <div class=" card-body text-center">
-              <img src="images/azza-mp_main-min_18.jpg" alt="pics" height="100%" width="100%">
-            </div>
-          </div>
-          <div class="col-6 cb">
-            <div class=" card-body text-center"><img src="images/azza-mp_main-min_18.jpg" alt="pics" height="100%"
-                width="100%">
-            </div>
-          </div>
-          <div class="col-6 cb">
-            <div class=" card-body text-center"><img src="images/azza-mp_main-min_18.jpg" alt="pics" height="100%"
-                width="100%">
-            </div>
-          </div>
-          <div class="col-6 cb">
-            <div class=" card-body text-center"><img src="images/azza-mp_main-min_18.jpg" alt="pics" height="100%"
-                width="100%">
-            </div>
-          </div>
-          <div class="col-6 cb">
-            <div class=" card-body text-center"><img src="images/azza-mp_main-min_18.jpg" alt="pics" height="100%"
-                width="100%">
-            </div>
-          </div>
-          <div class="col-6 cb">
-            <div class=" card-body text-center"><img src="images/azza-mp_main-min_18.jpg" alt="pics" height="100%"
-                width="100%">
-            </div>
-          </div>
-          <div class="col-6 cb">
-            <div class=" card-body text-center"><img src="images/azza-mp_main-min_18.jpg" alt="pics" height="100%"
-                width="100%">
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 	<section class="newproduct bgwhite p-t-45 p-b-105">
-		<div class="container">
-  <div class="wrap-slick2">
-    <div class="slick2">
 
+  <div class="categories text-center mb-3">
 
-      <div class="item-slick2 p-l-15 p-r-15">
+  <button type="button" onclick="default_cat(5)" class="s-text13 btn btn-outline-dark active">PC Cases</button>
 
-        <div class="block2">
-          <div class="block2-img wrap-pic-w of-hidden pos-relative">
-            <img src="" alt="IMG-PRODUCT" style="height: 300px;">
-            <div class="block2-overlay trans-0-4">
-              <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-              </a>
-              <div class="block2-btn-addcart w-size1 trans-0-4">
-                <a href="product_detail.php" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" name="btn_cart"
-                  type="submit">
-                  Details
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="block2-txt p-t-20">
-            <a href="product_detail.php" class="block2-name dis-block s-text3 p-b-5">
+  <?php
+  if(!empty($_SESSION['customlist'])){
+  $select_cat = "SELECT * FROM `tbl_category` LIMIT 4";
+							$select_cat_run = mysqli_query($con , $select_cat);
+							while($category = mysqli_fetch_array($select_cat_run)){?>
 
-            </a>
-            <span class="block2-price m-text6 p-r-5">
-              $56
+								<button type="button" onclick="cat_func(<?php echo $category['cat_id'] ?>)" class="s-text13 btn btn-outline-dark">
+									<?php echo $category['cat_name'];?>
+              </button>
 
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="item-slick2 p-l-15 p-r-15">
-
-        <div class="block2">
-          <div class="block2-img wrap-pic-w of-hidden pos-relative">
-            <img src="" alt="IMG-PRODUCT" style="height: 300px;">
-            <div class="block2-overlay trans-0-4">
-              <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-              </a>
-              <div class="block2-btn-addcart w-size1 trans-0-4">
-                <a href="product_detail.php" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" name="btn_cart"
-                  type="submit">
-                  Details
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="block2-txt p-t-20">
-            <a href="product_detail.php" class="block2-name dis-block s-text3 p-b-5">
-
-            </a>
-            <span class="block2-price m-text6 p-r-5">
-              $56
-
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="item-slick2 p-l-15 p-r-15">
-
-        <div class="block2">
-          <div class="block2-img wrap-pic-w of-hidden pos-relative">
-            <img src="" alt="IMG-PRODUCT" style="height: 300px;">
-            <div class="block2-overlay trans-0-4">
-              <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-              </a>
-              <div class="block2-btn-addcart w-size1 trans-0-4">
-                <a href="product_detail.php" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" name="btn_cart"
-                  type="submit">
-                  Details
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="block2-txt p-t-20">
-            <a href="product_detail.php" class="block2-name dis-block s-text3 p-b-5">
-
-            </a>
-            <span class="block2-price m-text6 p-r-5">
-              $56
-
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="item-slick2 p-l-15 p-r-15">
-
-        <div class="block2">
-          <div class="block2-img wrap-pic-w of-hidden pos-relative">
-            <img src="" alt="IMG-PRODUCT" style="height: 300px;">
-            <div class="block2-overlay trans-0-4">
-              <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-              </a>
-              <div class="block2-btn-addcart w-size1 trans-0-4">
-                <a href="product_detail.php" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" name="btn_cart"
-                  type="submit">
-                  Details
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="block2-txt p-t-20">
-            <a href="product_detail.php" class="block2-name dis-block s-text3 p-b-5">
-
-            </a>
-            <span class="block2-price m-text6 p-r-5">
-              $56
-
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="item-slick2 p-l-15 p-r-15">
-
-        <div class="block2">
-          <div class="block2-img wrap-pic-w of-hidden pos-relative">
-            <img src="" alt="IMG-PRODUCT" style="height: 300px;">
-            <div class="block2-overlay trans-0-4">
-              <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-              </a>
-              <div class="block2-btn-addcart w-size1 trans-0-4">
-                <a href="product_detail.php" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" name="btn_cart"
-                  type="submit">
-                  Details
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="block2-txt p-t-20">
-            <a href="product_detail.php" class="block2-name dis-block s-text3 p-b-5">
-
-            </a>
-            <span class="block2-price m-text6 p-r-5">
-              $56
-
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="item-slick2 p-l-15 p-r-15">
-
-        <div class="block2">
-          <div class="block2-img wrap-pic-w of-hidden pos-relative">
-            <img src="" alt="IMG-PRODUCT" style="height: 300px;">
-            <div class="block2-overlay trans-0-4">
-              <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-              </a>
-              <div class="block2-btn-addcart w-size1 trans-0-4">
-                <a href="product_detail.php" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" name="btn_cart"
-                  type="submit">
-                  Details
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="block2-txt p-t-20">
-            <a href="product_detail.php" class="block2-name dis-block s-text3 p-b-5">
-
-            </a>
-            <span class="block2-price m-text6 p-r-5">
-              $56
-
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+							<?php }}?>
   </div>
+  <hr>
+  <div class="container" >
+  <div class="row" id="fetch_cat">
+</div>
+        
+        </div>
 </div>
 </section>
 
@@ -379,6 +169,82 @@
     integrity="sha512-DI3rPuZDcpH/mSGyN22erN5QFnhl760f50/te7FTIYxodEF8jJnSFnfnmG/c+osmIQemvUrnBtxnMpNdzvx1/g=="
     data-cf-beacon='{"rayId":"7ec6134a2ea9896e","version":"2023.4.0","b":1,"token":"cd0b4b3a733644fc843ef0b185f98241","si":100}'
     crossorigin="anonymous"></script>
+
+
+<script>
+    //for default category dough
+    FetchData();
+
+ default_cat(5);   
+function default_cat(id) {
+    //  $('#show').show();
+   $.ajax({
+     url : 'default_cat.php',
+     type : 'POST',
+     data : {
+      
+      abc: id
+     },
+     success : function (data){
+       // console.log(data);
+       $('#fetch_cat').html(data);
+     }
+   })
+   
+ }
+//for default category dough
+
+// for category wise fetch
+
+function cat_func(catid) {
+   
+   $.ajax({
+     url : 'category_custom.php',
+     type : 'POST',
+     data : {
+      
+       catid : catid
+     },
+     success : function (data){
+       // console.log(data);
+       $('#fetch_cat').html(data);
+     }
+   })
+   
+ }
+
+// for category wise fetch
+
+function cat_function(id) {
+  
+$.ajax({
+  url : 'custom_cart.php',
+  type : 'POST',
+  data : {
+    cart : 'cart',
+    id : id
+  },
+  success : function (data){
+    console.log(data);
+    $('#ID_cartList').html(data);
+  }
+})
+
+}
+function FetchData(){
+
+$.ajax({
+  url : 'custom_cart.php',
+  type : 'POST',
+  
+  success : function (data){
+    console.log(data);
+    $('#ID_cartList').html(data);
+  }
+})
+}
+
+</script>
 </body>
 
 </html>

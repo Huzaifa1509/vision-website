@@ -17,7 +17,7 @@ if (isset($_POST['btn_checkout'])) {
 	$totalprice = $_POST['totalprice'];
 
 
-    $query_i_order = "INSERT INTO `tbl_order`(`o_date`, `u_id`,`address`) VALUES ('$date','$user_id' , '$address')";
+    $query_i_order = "INSERT INTO `tbl_order`(`o_date`, `u_id`,`address`,`total_purchase`) VALUES ('$date','$user_id' , '$address','$totalprice')";
     $query_i_order_run = mysqli_query($con,$query_i_order);
     $last_row = mysqli_insert_id($con);
     //   echo $last_row;
@@ -25,9 +25,10 @@ if (isset($_POST['btn_checkout'])) {
      $p_name =   $value['productname'];
      $p_price =   $value['productprice'];
 	 $p_quantity = $value['productquantity'];
+	 $product_des = $value['productdes'];
     
 
-    $query_i_items = "INSERT INTO `tbl_checkout`(`p_price`, `p_name`, `p_qty`, `o_id`) VALUES ('$p_price','$p_name','$p_quantity','$last_row')";
+    $query_i_items = "INSERT INTO `tbl_checkout`(`p_price`, `p_name`, `p_qty`,`p_des`, `o_id`) VALUES ('$p_price','$p_name','$p_quantity','$product_des','$last_row')";
     $query_i_items_run = mysqli_query($con,$query_i_items);
     if ($query_i_items_run) {
 

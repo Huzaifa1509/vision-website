@@ -58,13 +58,14 @@ if(!isset( $_SESSION['admin_loggedin'])){
 
             <table class="table table-bordered text-center">
                 <tr>
+  
                     <th>Date</th>
                     <th>User Name</th>
-                    <th>Email</th>
                     <th>Address</th>
-                    <th>Price</th>
-                    <th>Product Name</th>
-                    <th>Product Quantity</th>
+                    <th>Email</th>
+                    <th>Total Purchase</th>
+                    <th></th>
+
 
 
                 
@@ -72,21 +73,20 @@ if(!isset( $_SESSION['admin_loggedin'])){
                 </tr>
             
 <?php 
-$select_query = "SELECT *
-FROM ((tbl_order
-INNER JOIN tbl_user ON tbl_order.u_id = tbl_user.id)
-INNER JOIN tbl_checkout ON tbl_order.o_id = tbl_checkout.o_id)";
+
+$select_query = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id ORDER BY `o_id` DESC LIMIT 50";
 $select_query_run = mysqli_query($con, $select_query);
 while($purchase = mysqli_fetch_array($select_query_run)){
 ?>
                 <tr>
+
                     <td><?php echo $purchase['o_date']; ?></td>
                     <td><?php echo $purchase['uname'].$purchase['lastname']; ?></td>
-                    <td><?php echo $purchase['email']; ?></td>
                     <td><?php echo $purchase['address']; ?></td>
-                    <td><?php echo $purchase['p_price']; ?></td>
-                    <td><?php echo $purchase['p_name']; ?></td>
-                    <td><?php echo $purchase['p_qty']; ?></td>
+                    <td><?php echo $purchase['email']; ?></td>
+                    <td>Rs.<?php echo $purchase['total_purchase']; ?></td>
+                    <td><a href="order.php?id=<?php echo $purchase['o_id']; ?>" class="btn btn-primary">View Data</a></td>
+
 
 
 

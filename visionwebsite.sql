@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2023 at 01:49 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Aug 21, 2023 at 12:16 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -81,6 +81,7 @@ INSERT INTO `tbl_category` (`cat_id`, `cat_name`, `brand`) VALUES
 (2, 'Motherboard', 1),
 (3, 'GPU', 1),
 (4, 'Processor', 1),
+(5, 'PC Cases', NULL),
 (6, 'Others', NULL);
 
 -- --------------------------------------------------------
@@ -91,54 +92,59 @@ INSERT INTO `tbl_category` (`cat_id`, `cat_name`, `brand`) VALUES
 
 CREATE TABLE `tbl_checkout` (
   `p_price` int(100) NOT NULL,
-  `p_name` varchar(100) NOT NULL,
-  `p_qty` int(100) NOT NULL,
+  `p_name` varchar(1000) NOT NULL,
+  `p_qty` int(11) NOT NULL,
+  `p_des` varchar(2000) NOT NULL,
   `o_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_custompc_checkout`
+--
+
+CREATE TABLE `tbl_custompc_checkout` (
+  `product_image` varchar(1000) NOT NULL,
+  `product_name` varchar(1000) NOT NULL,
+  `product_cat` int(100) NOT NULL,
+  `product_price` int(100) NOT NULL,
+  `order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_checkout`
+-- Dumping data for table `tbl_custompc_checkout`
 --
 
-INSERT INTO `tbl_checkout` (`p_price`, `p_name`, `p_qty`, `o_id`) VALUES
-(12000, 'ASUS 4070Ti', 8, 1),
-(15000, 'ROG Strix Gaming', 2, 1),
-(14999, 'MSI B550M PRO-VDH WIFI.', 1, 3),
-(16999, 'Biostar B450M Motherboard', 1, 3),
-(11999, 'ASUS Z97-P Motherboard', 1, 3),
-(13999, 'ASUS B560M-Plus Motherboard', 1, 3),
-(7800, 'RX 7900 RADEON', 5, 4),
-(12000, 'ASUS 4070Ti', 8, 4),
-(15000, 'ROG Strix Gaming', 4, 4),
-(14999, 'MSI B550M PRO-VDH WIFI.', 9, 5),
-(14999, 'MSI B550M PRO-VDH WIFI.', 9, 6),
-(14999, 'MSI B550M PRO-VDH WIFI.', 9, 7),
-(14999, 'MSI B550M PRO-VDH WIFI.', 9, 8),
-(16999, 'Biostar B450M Motherboard', 10, 8),
-(11999, 'ASUS Z97-P Motherboard', 6, 8),
-(13999, 'ASUS B560M-Plus Motherboard', 8, 8),
-(7800, 'RX 7900 RADEON', 2, 9),
-(12000, 'ASUS 4070Ti', 2, 9),
-(7800, 'RX 7900 RADEON', 1, 10),
-(12000, 'ASUS 4070Ti', 1, 10),
-(15000, 'ROG Strix Gaming', 1, 10),
-(900, 'Gaming Keyboard', 10, 11),
-(7800, 'RX 7900 RADEON', 2, 12),
-(12000, 'ASUS 4070Ti', 2, 12),
-(15000, 'ROG Strix Gaming', 2, 12),
-(7800, 'RX 7900 RADEON', 1, 13),
-(12000, 'ASUS 4070Ti', 1, 13),
-(16999, 'Biostar B450M Motherboard', 1, 14),
-(11999, 'ASUS Z97-P Motherboard', 1, 14),
-(16999, 'Biostar B450M Motherboard', 2, 15),
-(11999, 'ASUS Z97-P Motherboard', 2, 15),
-(14999, 'MSI B550M PRO-VDH WIFI.', 2, 15),
-(4999, 'G.SKILL Trident Z RGB Memory', 1, 16),
-(7800, 'ROG Certified RAM', 1, 16),
-(6999, 'ROG Strix RAM', 1, 16),
-(7800, 'RX 7900 RADEON', 1, 17),
-(5900, 'Asus Gaming Processor', 1, 17),
-(5600, 'G.SKILL Trident Z Memory', 1, 17);
+INSERT INTO `tbl_custompc_checkout` (`product_image`, `product_name`, `product_cat`, `product_price`, `order_id`) VALUES
+('pc2.jpg2023-08-20-19-04', 'Black PC Case ', 5, 12000, 1),
+('m2.jpg2023-08-18-23-29', 'Biostar B450M Motherboard', 2, 16999, 1),
+('g4.jpg2023-08-18-23-12', 'ROG Strix Gaming', 3, 15000, 1),
+('p3.jpg2023-08-18-23-18', 'Asus Processor', 4, 40000, 1),
+('r2.jpg2023-08-18-23-38', 'G.SKILL Trident Z RGB Memory', 1, 4999, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_custompc_orders`
+--
+
+CREATE TABLE `tbl_custompc_orders` (
+  `order_id` int(11) NOT NULL,
+  `order_date` date NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `order_address` varchar(2000) NOT NULL,
+  `order_message` varchar(1000) NOT NULL,
+  `order_phone_no` int(12) NOT NULL,
+  `total_purchase` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_custompc_orders`
+--
+
+INSERT INTO `tbl_custompc_orders` (`order_id`, `order_date`, `user_id`, `order_address`, `order_message`, `order_phone_no`, `total_purchase`) VALUES
+(1, '2023-08-20', 1, 'karachi', 'i need it urgent', 2147483647, 88998);
 
 -- --------------------------------------------------------
 
@@ -150,30 +156,9 @@ CREATE TABLE `tbl_order` (
   `o_id` int(11) NOT NULL,
   `o_date` date NOT NULL,
   `u_id` int(11) NOT NULL,
-  `address` varchar(5000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_order`
---
-
-INSERT INTO `tbl_order` (`o_id`, `o_date`, `u_id`, `address`) VALUES
-(1, '2023-08-19', 1, ''),
-(3, '2023-08-19', 1, ''),
-(4, '2023-08-19', 1, ''),
-(5, '2023-08-19', 1, ''),
-(6, '2023-08-19', 1, ''),
-(7, '2023-08-19', 1, ''),
-(8, '2023-08-19', 1, ''),
-(9, '2023-08-19', 1, ''),
-(10, '2023-08-19', 1, ''),
-(11, '2023-08-19', 1, ''),
-(12, '2023-08-19', 1, ''),
-(13, '2023-08-19', 1, ''),
-(14, '2023-08-19', 1, '1D 3/3 Nazimabad, Karachi'),
-(15, '2023-08-19', 1, 'fsdfsdfwefwerw4t4rt'),
-(16, '2023-08-19', 1, 'hyjkjkfghj'),
-(17, '2023-08-19', 1, 'fgfdgfdgdfhgfjghukiuyo');
+  `address` varchar(2000) NOT NULL,
+  `total_purchase` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -216,7 +201,11 @@ INSERT INTO `tbl_products` (`p_id`, `p_name`, `p_brand`, `p_price`, `p_img`, `p_
 (32, 'LogiTech Mouse', 3, 2000, 'o2.jpg2023-08-18-23-37', 'The LogiTech mouse is designed to redefine your computing experience, putting precision and comfort at your fingertips. With its ergonomic design, advanced tracking technology, and customizable features, this mouse empowers you to navigate, create, and game with confidence.', 6, 56),
 (33, 'Gaming Keyboard', 3, 900, 'o3.jpg2023-08-18-23-07', 'Introducing the Gaming Keyboard, a keyboard that combines performance, comfort, and style to transform the way you interact with your digital world. With its responsive keys, customizable features, and sleek design, this keyboard is your gateway to enhanced productivity and seamless typing', 6, 12),
 (34, 'Profeesional use Keyboard', 3, 1500, 'o4.jpg2023-08-18-23-57', 'The keyboard that combines performance, comfort, and style to transform the way you interact with your digital world. With its responsive keys, customizable features, and sleek design, this keyboard is your gateway to enhanced productivity and seamless typing', 6, 56),
-(35, 'RX RADEON 600', 1, 5600, 'g1.jpg2023-08-18-23-17', 'AMD today announced the Radeon RX RX 6000 series of gaming graphics cards. Built on the new 7nm RDNA 2 architecture, these cards provide up to 2x improvement in performance', 3, 56);
+(35, 'RX RADEON 600', 1, 5600, 'g1.jpg2023-08-18-23-17', 'AMD today announced the Radeon RX RX 6000 series of gaming graphics cards. Built on the new 7nm RDNA 2 architecture, these cards provide up to 2x improvement in performance', 3, 56),
+(36, 'White PC Case ', 3, 11000, 'pc1.jpg2023-08-20-19-04', 'A gaming PC case combines striking aesthetics with efficient cooling, supporting high-performance components and customizable RGB lighting to create an immersive gaming experience.', 5, 56),
+(37, 'Black PC Case ', 3, 12000, 'pc2.jpg2023-08-20-19-04', 'A gaming PC case combines striking aesthetics with efficient cooling, supporting high-performance components and customizable RGB lighting to create an immersive gaming experience.', 5, 45),
+(38, 'Tempered Glass Case', 3, 10000, 'pc3.jpg2023-08-20-19-40', 'A gaming PC case combines striking aesthetics with efficient cooling, supporting high-performance components and customizable RGB lighting to create an immersive gaming experience.', 5, 45),
+(39, 'Premium Black Case ', 3, 15000, 'pc4.jpg2023-08-20-19-32', 'A gaming PC case combines striking aesthetics with efficient cooling, supporting high-performance components and customizable RGB lighting to create an immersive gaming experience.', 5, 67);
 
 -- --------------------------------------------------------
 
@@ -230,7 +219,7 @@ CREATE TABLE `tbl_user` (
   `lastname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `user_pic` varchar(1000) NOT NULL DEFAULT 'images/icons/icon-header-03.png'
+  `user_pic` varchar(1000) NOT NULL DEFAULT 'icons/icon-header-03.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -239,8 +228,8 @@ CREATE TABLE `tbl_user` (
 
 INSERT INTO `tbl_user` (`id`, `uname`, `lastname`, `email`, `password`, `user_pic`) VALUES
 (1, 'Huzaifa', 'Irfan', 'huzaifairfan2144@gmail.com', '123', 'card.jpg2023-08-18-23-31'),
-(2, 'ali', 'khan', 'ahmad@gmail.com', '5231', 'images/icons/icon-header-03.png'),
-(3, 'Sarim', 'Khan', 'sarimkhan@gmail.com', '1234', 'images/icons/icon-header-03.png');
+(2, 'ali', 'khan', 'ahmad@gmail.com', '5231', 'icons/icon-header-03.png'),
+(3, 'Sarim', 'Khan', 'sarimkhan@gmail.com', '1234', 'icons/icon-header-03.png');
 
 -- --------------------------------------------------------
 
@@ -294,11 +283,24 @@ ALTER TABLE `tbl_checkout`
   ADD KEY `o_id` (`o_id`);
 
 --
+-- Indexes for table `tbl_custompc_checkout`
+--
+ALTER TABLE `tbl_custompc_checkout`
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Indexes for table `tbl_custompc_orders`
+--
+ALTER TABLE `tbl_custompc_orders`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
   ADD PRIMARY KEY (`o_id`),
-  ADD KEY `fk_2` (`u_id`);
+  ADD KEY `u_id` (`u_id`);
 
 --
 -- Indexes for table `tbl_products`
@@ -340,19 +342,25 @@ ALTER TABLE `tbl_brand`
 -- AUTO_INCREMENT for table `tbl_category`
 --
 ALTER TABLE `tbl_category`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tbl_custompc_orders`
+--
+ALTER TABLE `tbl_custompc_orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `o_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `o_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_products`
 --
 ALTER TABLE `tbl_products`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
@@ -383,10 +391,22 @@ ALTER TABLE `tbl_checkout`
   ADD CONSTRAINT `tbl_checkout_ibfk_1` FOREIGN KEY (`o_id`) REFERENCES `tbl_order` (`o_id`);
 
 --
+-- Constraints for table `tbl_custompc_checkout`
+--
+ALTER TABLE `tbl_custompc_checkout`
+  ADD CONSTRAINT `tbl_custompc_checkout_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `tbl_custompc_orders` (`order_id`);
+
+--
+-- Constraints for table `tbl_custompc_orders`
+--
+ALTER TABLE `tbl_custompc_orders`
+  ADD CONSTRAINT `tbl_custompc_orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`id`);
+
+--
 -- Constraints for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  ADD CONSTRAINT `fk_2` FOREIGN KEY (`u_id`) REFERENCES `tbl_user` (`id`);
+  ADD CONSTRAINT `tbl_order_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `tbl_user` (`id`);
 
 --
 -- Constraints for table `tbl_products`

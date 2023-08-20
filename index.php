@@ -165,7 +165,7 @@
 						<img src="images/system.jpg" alt="IMG-BENNER">
 						<div class="block1-wrapbtn w-size2">
 
-							<a href="products.php?id=5" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+							<a href="products.php?id=6" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
 								Others
 							</a>
 						</div>
@@ -229,10 +229,6 @@
 								<img src="<?php echo 'admin/img/' . $item['p_img'];?>" alt="IMG-PRODUCT"
 									style="height: 300px;">
 								<div class="block2-overlay trans-0-4">
-									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-									</a>
 									<div class="block2-btn-addcart w-size1 trans-0-4">
 											<a href="product_detail.php?id=<?php echo $item['p_id'];?>&&cat_id=<?php echo $cat_id;?>" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"
 												name="btn_cart" type="submit">
