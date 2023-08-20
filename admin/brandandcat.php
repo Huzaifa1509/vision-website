@@ -54,31 +54,49 @@ if(!isset( $_SESSION['admin_loggedin'])){
 <section class="main_content dashboard_part">
 <div class="main_content_iner ">
 <div class="container me-5 mt-5">
-            <h2 class="text-center mb-4 pb-5 mt-5 pt-5 ">Brand and catgeories</h2>
+            <h2 class="text-center mb-4 pb-5 mt-5 pt-5 ">Brand and Catgeories</h2>
 
             <table class="table table-light table-bordered text-center">
                 <tr>
                     <th>Categories</th>
-                    <th>Brands</th>
-                
-
                 </tr>
             
 <?php 
 
-$select_query = "SELECT * FROM `tbl_category` INNER JOIN `tbl_brand` ON tbl_category.brand = tbl_brand.brand_id";
+$select_query = "SELECT * FROM `tbl_category`";
 $select_query_run = mysqli_query($con, $select_query);
 while($catgeories = mysqli_fetch_array($select_query_run)){
 ?>
                 <tr>
                     <td><?php echo $catgeories['cat_name']?></td>
-                    <td><?php echo $catgeories['brand_name']?></td>
                    
 
                 </tr>
 <?php } ?>
 
             </table>
+<br><br>
+            <table class="table table-light table-bordered text-center">
+                <tr>
+                    <th>Brands</th>
+                </tr>
+            
+<?php 
+
+$select_brand = "SELECT * FROM `tbl_brand`";
+$select_brand_run = mysqli_query($con, $select_brand);
+while($brands = mysqli_fetch_array($select_brand_run)){
+?>
+                <tr>
+                    <td><?php echo $brands['brand_name']?></td>
+                   
+
+                </tr>
+<?php } ?>
+
+            </table>
+            
+
         </div>
         </div>
     </section>
