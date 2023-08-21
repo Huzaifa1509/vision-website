@@ -1,9 +1,7 @@
 <?php
 include('../connection.php');
 include('verification.php');
-// if(!isset( $_SESSION['admin_loggedin'])){
-//     header('location:login.php');
-// }
+$order_id = $_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,45 +28,48 @@ include('verification.php');
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">View Order</h1>
-                    <table class="table table-bordered text-center"  id="datatablesSimple">
-                <tr>
-  
-                    <th>Date</th>
-                    <th>User Name</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Total Purchase</th>
-                    <th></th>
+                    <h1 class="mt-4">User Purchase</h1>
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Description</th>
+                            <th>Product Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
 
 
 
-                
 
-                </tr>
-            
-<?php 
 
-$select_query = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id ORDER BY `o_id` DESC LIMIT 50";
+
+
+                        </tr>
+
+                        <?php 
+
+
+$select_query = "SELECT * FROM `tbl_checkout` WHERE `o_id` = '$order_id'";
 $select_query_run = mysqli_query($con, $select_query);
 while($purchase = mysqli_fetch_array($select_query_run)){
 ?>
-                <tr>
-
-                    <td><?php echo $purchase['o_date']; ?></td>
-                    <td><?php echo $purchase['uname'].$purchase['lastname']; ?></td>
-                    <td><?php echo $purchase['address']; ?></td>
-                    <td><?php echo $purchase['email']; ?></td>
-                    <td>Rs.<?php echo $purchase['total_purchase']; ?></td>
-                    <td><a href="vieworder.php?id=<?php echo $purchase['o_id']; ?>" class="btn btn-primary">View Data</a></td>
-
+                        <tr>
+                            <td><?php echo $purchase['p_name']; ?></td>
+                            <td><?php echo $purchase['p_des']; ?></td>
+                            <td>Rs.<?php echo $purchase['p_price']; ?></td>
+                            <td><?php echo $purchase['p_qty']; ?></td>
+                            <td><?php echo $purchase['p_price']; ?> x <?php echo $purchase['p_qty']; ?> = Rs.<?php $sumproduct = $purchase['p_price']*$purchase['p_qty'];
+                    echo $sumproduct;?></td>
 
 
 
-                </tr>
-<?php } ?>
 
-            </table>
+
+
+
+                        </tr>
+                        <?php } ?>
+
+                    </table>
                 </div>
             </main>
             <!-- footer -->

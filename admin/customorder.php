@@ -1,9 +1,6 @@
 <?php
 include('../connection.php');
 include('verification.php');
-// if(!isset( $_SESSION['admin_loggedin'])){
-//     header('location:login.php');
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,23 +18,25 @@ include('verification.php');
 </head>
 
 <body class="sb-nav-fixed">
-    <!-- navbar -->
-    <?php include('navbar.php'); ?>
+   <!-- navbar -->
+   <?php include('navbar.php'); ?>
     <div id="layoutSidenav">
-        <!-- sidebar -->
-        <?php include('sidenav.php'); ?>
+       <!-- sidebar -->
+   <?php include('sidenav.php'); ?>
 
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">View Order</h1>
-                    <table class="table table-bordered text-center"  id="datatablesSimple">
+                    <h1 class="mt-4">Custom Order</h1>
+                    <table class="table table-bordered text-center" id="datatablesSimple">
                 <tr>
   
                     <th>Date</th>
                     <th>User Name</th>
-                    <th>Address</th>
                     <th>Email</th>
+                    <th>Address</th>
+                    <th>Message</th>
+                    <th>Phone no.</th>
                     <th>Total Purchase</th>
                     <th></th>
 
@@ -49,18 +48,21 @@ include('verification.php');
             
 <?php 
 
-$select_query = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id ORDER BY `o_id` DESC LIMIT 50";
+$select_query = "SELECT * FROM tbl_custompc_orders INNER JOIN tbl_user ON tbl_user.id = tbl_custompc_orders.user_id ORDER BY `order_id` DESC LIMIT 50";
 $select_query_run = mysqli_query($con, $select_query);
 while($purchase = mysqli_fetch_array($select_query_run)){
 ?>
                 <tr>
 
-                    <td><?php echo $purchase['o_date']; ?></td>
+                    <td><?php echo $purchase['order_date']; ?></td>
                     <td><?php echo $purchase['uname'].$purchase['lastname']; ?></td>
-                    <td><?php echo $purchase['address']; ?></td>
                     <td><?php echo $purchase['email']; ?></td>
+                    <td><?php echo $purchase['order_address']; ?></td>
+                    <td><?php echo $purchase['order_message']; ?></td>
+                    <td><?php echo $purchase['order_phone_no']; ?></td>
                     <td>Rs.<?php echo $purchase['total_purchase']; ?></td>
-                    <td><a href="vieworder.php?id=<?php echo $purchase['o_id']; ?>" class="btn btn-primary">View Data</a></td>
+
+                    <td><a href="view_custom_order.php?id=<?php echo $purchase['order_id']; ?>" class="btn btn-primary">View Data</a></td>
 
 
 
@@ -71,17 +73,15 @@ while($purchase = mysqli_fetch_array($select_query_run)){
             </table>
                 </div>
             </main>
-            <!-- footer -->
-            <?php include('footer.php'); ?>
+          <!-- footer -->
+   <?php include('footer.php'); ?>
 
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>

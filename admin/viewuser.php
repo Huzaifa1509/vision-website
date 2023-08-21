@@ -1,9 +1,6 @@
 <?php
 include('../connection.php');
 include('verification.php');
-// if(!isset( $_SESSION['admin_loggedin'])){
-//     header('location:login.php');
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,63 +18,51 @@ include('verification.php');
 </head>
 
 <body class="sb-nav-fixed">
-    <!-- navbar -->
-    <?php include('navbar.php'); ?>
+   <!-- navbar -->
+   <?php include('navbar.php'); ?>
     <div id="layoutSidenav">
-        <!-- sidebar -->
-        <?php include('sidenav.php'); ?>
+       <!-- sidebar -->
+   <?php include('sidenav.php'); ?>
 
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">View Order</h1>
-                    <table class="table table-bordered text-center"  id="datatablesSimple">
+                    <h1 class="mt-4">View User</h1>
+                    <table class="table table-light table-bordered text-center">
                 <tr>
-  
-                    <th>Date</th>
-                    <th>User Name</th>
-                    <th>Address</th>
+                    <th>Full Name</th>
                     <th>Email</th>
-                    <th>Total Purchase</th>
-                    <th></th>
-
-
-
+                    <th>Password</th>
                 
 
                 </tr>
             
 <?php 
 
-$select_query = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id ORDER BY `o_id` DESC LIMIT 50";
+$select_query = "SELECT * FROM `tbl_user` ";
 $select_query_run = mysqli_query($con, $select_query);
-while($purchase = mysqli_fetch_array($select_query_run)){
+while($user = mysqli_fetch_array($select_query_run)){
 ?>
                 <tr>
-
-                    <td><?php echo $purchase['o_date']; ?></td>
-                    <td><?php echo $purchase['uname'].$purchase['lastname']; ?></td>
-                    <td><?php echo $purchase['address']; ?></td>
-                    <td><?php echo $purchase['email']; ?></td>
-                    <td>Rs.<?php echo $purchase['total_purchase']; ?></td>
-                    <td><a href="vieworder.php?id=<?php echo $purchase['o_id']; ?>" class="btn btn-primary">View Data</a></td>
-
-
-
+                    <td><?php echo $user['uname'];echo $user['lastname']?></td>
+                    <td><?php echo $user['email']?></td>
+                    <td><?php echo $user['password']?></td>
+                   
 
                 </tr>
 <?php } ?>
 
             </table>
+                    
                 </div>
             </main>
-            <!-- footer -->
-            <?php include('footer.php'); ?>
+          <!-- footer -->
+   <?php include('footer.php'); ?>
 
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/chart-area-demo.js"></script>

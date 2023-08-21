@@ -7,15 +7,15 @@ $select_query_run = mysqli_query($con , $select_query); ?>
 
 
 
-
+<div class="row">
 
     <?php while ($row = mysqli_fetch_array($select_query_run)) { ?>
 
-        <div class="col-lg-3" >
+        <div class="col-lg-3 col-md-3 col-sm-12 col-12" >
 
 
  
-            <div class="card" style="width: 18rem;">
+            <div class="card" >
         <img src="<?php echo './admin/img/'.$row['p_img'];?>" class="card-img-top" alt="..." style="height: 200px;">
         <div class="card-body">
         <h6 class="card-title" ><?php echo $row['p_name'];?></h6>
@@ -32,5 +32,5 @@ $select_query_run = mysqli_query($con , $select_query); ?>
 
 <?php  } ?>
 
-
+    </div>
 

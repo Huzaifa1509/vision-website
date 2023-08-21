@@ -1,100 +1,64 @@
 <?php
-include("..\connection.php");
-if(!isset( $_SESSION['admin_loggedin'])){
-  header('location:login.php');
-}
-$query = "SELECT * FROM `tbl_category` ";
-$query_run = mysqli_query($con , $query);
-
-$select_query = "SELECT * FROM `tbl_brand`";
-$select_query_run = mysqli_query($con , $select_query);
-
-if(isset($_POST['btn_submit'])){
-
-  $product_name = $_POST['p_name'];
-  $product_price = $_POST['p_price'];
-  $product_description = $_POST['p_description'];
-  $product_brand = $_POST['brand'];
-  $product_category = $_POST['category'];
-  $product_quantity = $_POST['p_qty'];
-  $product_image = $_FILES['p_img']['name']. date('Y-m-d-H-s');
-  $image_tmp = $_FILES['p_img']['tmp_name'];
-  $img_path = './img/' .$product_image;
-  move_uploaded_file($image_tmp,$img_path);
-
-  $query_insert = "INSERT INTO `tbl_products`( `p_name`, `p_brand`, `p_price`, `p_img`, `p_description`,`p_cat`,`p_qty`) VALUES ('$product_name','$product_brand','$product_price','$product_image','$product_description','$product_category','$product_quantity')";
-  $query_insert_run = mysqli_query($con , $query_insert);
-  echo "<script>alert('component added !')</script>";
-
-}
+include('../connection.php');
+include('verification.php');
+  $query = "SELECT * FROM `tbl_category` ";
+  $query_run = mysqli_query($con , $query);
+  
+  $select_query = "SELECT * FROM `tbl_brand`";
+  $select_query_run = mysqli_query($con , $select_query);
+  
+  if(isset($_POST['btn_submit'])){
+  
+    $product_name = $_POST['p_name'];
+    $product_price = $_POST['p_price'];
+    $product_description = $_POST['p_description'];
+    $product_brand = $_POST['brand'];
+    $product_category = $_POST['category'];
+    $product_quantity = $_POST['p_qty'];
+    $product_image = $_FILES['p_img']['name']. date('Y-m-d-H-s');
+    $image_tmp = $_FILES['p_img']['tmp_name'];
+    $img_path = './img/' .$product_image;
+    move_uploaded_file($image_tmp,$img_path);
+  
+    $query_insert = "INSERT INTO `tbl_products`( `p_name`, `p_brand`, `p_price`, `p_img`, `p_description`,`p_cat`,`p_qty`) VALUES ('$product_name','$product_brand','$product_price','$product_image','$product_description','$product_category','$product_quantity')";
+    $query_insert_run = mysqli_query($con , $query_insert);
+    echo "<script>alert('component added !')</script>";
+  
+  }
 ?>
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 
 <head>
-
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Finance</title>
-  <link rel="icon" href="../images/icons/favicon.png" type="image/png">
-
-  <link rel="stylesheet" href="css/bootstrap1.min.css" />
-
-  <link rel="stylesheet" href="vendors/themefy_icon/themify-icons.css" />
-
-  <link rel="stylesheet" href="vendors/swiper_slider/css/swiper.min.css" />
-
-  <link rel="stylesheet" href="vendors/select2/css/select2.min.css" />
-
-  <link rel="stylesheet" href="vendors/niceselect/css/nice-select.css" />
-
-  <link rel="stylesheet" href="vendors/owl_carousel/css/owl.carousel.css" />
-
-  <link rel="stylesheet" href="vendors/gijgo/gijgo.min.css" />
-
-  <link rel="stylesheet" href="vendors/font_awesome/css/all.min.css" />
-  <link rel="stylesheet" href="vendors/tagsinput/tagsinput.css" />
-
-  <link rel="stylesheet" href="vendors/datatable/css/jquery.dataTables.min.css" />
-  <link rel="stylesheet" href="vendors/datatable/css/responsive.dataTables.min.css" />
-  <link rel="stylesheet" href="vendors/datatable/css/buttons.dataTables.min.css" />
-
-  <link rel="stylesheet" href="vendors/text_editor/summernote-bs4.css" />
-
-  <link rel="stylesheet" href="vendors/morris/morris.css">
-
-  <link rel="stylesheet" href="vendors/material_icon/material-icons.css" />
-
-  <link rel="stylesheet" href="css/metisMenu.css">
-
-  <link rel="stylesheet" href="css/style1.css" />
-  <link rel="stylesheet" href="css/colors/default.css" id="colorSkinCSS">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="crm_body_bg">
+<body class="sb-nav-fixed">
+   <!-- navbar -->
+   <?php include('navbar.php'); ?>
+    <div id="layoutSidenav">
+       <!-- sidebar -->
+   <?php include('sidenav.php'); ?>
 
-
-
-  <?php include("nav.html");?>
-
-
-  <section class="main_content dashboard_part">
-    <div class="main_content_iner ">
-      <div class="container-fluid plr_30 body_white_bg pt_30">
-        <div class="row justify-content-center">
-          <div class="col-lg-12">
-            <div class="white_box mb_30">
-              <div class="box_header ">
-                <div class="main-title">
-                  <h3 class="mb-0">Add Product</h3>
-                </div>
-              </div>
-              <form method="post" enctype="multipart/form-data">
-                <div class="mb-3">
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Maintain Product</h1>
+                    <form method="post" enctype="multipart/form-data">
+                         <div class="row">
+                <div class="mb-3 col-lg-6">
                   <label>Name</label>
                   <input type="text" class="form-control" id="exampleInputEmail1" name="p_name">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 col-lg-6">
                   <label>Brand</label>
                   <select class="form-select" id="inputGroupSelect01" name="brand">
                     <?php while($brand = mysqli_fetch_array($select_query_run)){?>
@@ -105,23 +69,20 @@ if(isset($_POST['btn_submit'])){
                   </select>
 
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 col-lg-6">
                   <label>Price</label>
                   <input type="number" class="form-control" id="exampleInputEmail1" name="p_price">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 col-lg-6">
                   <label>Image</label>
                   <input type="file" class="form-control" id="exampleInputEmail1" name="p_img">
                 </div>
-                <div class="mb-3">
-                  <label>Description</label>
-                  <textarea type="text" class="form-control" id="exampleInputEmail1" name="p_description"></textarea>
-                </div>
-                <div class="mb-3">
+
+                <div class="mb-3 col-lg-6">
                   <label>Quantity</label>
                   <input type="number" class="form-control" id="exampleInputEmail1" name="p_qty">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 col-lg-6">
                   <label>Category</label>
                   <select class="form-select" id="inputGroupSelect01" name="category">
                     <?php while($data = mysqli_fetch_array($query_run)){?>
@@ -131,81 +92,30 @@ if(isset($_POST['btn_submit'])){
                     <?php } ?>
                   </select>
                 </div>
+                <div class="mb-3 col-lg-12">
+                  <label>Description</label>
+                  <textarea type="text" class="form-control" id="exampleInputEmail1" name="p_description"></textarea>
+                </div>
 
                 <input type="submit" value="Submit" name="btn_submit" class="btn btn-primary">
+            </div>
               </form>
-
-            </div>
-          </div>
+                </div>
+            </main>
+          <!-- footer -->
+   <?php include('footer.php'); ?>
 
         </div>
-      </div>
-
-      <div class="footer_part">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-12 col-sm-12">
-              <div class="footer_iner text-center">
-                <p>2020 © Influence - Designed by<a href="#"> Dashboard</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </section>
-
-
-
-  <script src="js/jquery1-3.4.1.min.js"></script>
-
-  <script src="js/popper1.min.js"></script>
-
-  <script src="js/bootstrap1.min.js"></script>
-
-  <script src="js/metisMenu.js"></script>
-
-  <script src="vendors/count_up/jquery.waypoints.min.js"></script>
-
-  <script src="vendors/chartlist/Chart.min.js"></script>
-
-  <script src="vendors/count_up/jquery.counterup.min.js"></script>
-
-  <script src="vendors/swiper_slider/js/swiper.min.js"></script>
-
-  <script src="vendors/niceselect/js/jquery.nice-select.min.js"></script>
-
-  <script src="vendors/owl_carousel/js/owl.carousel.min.js"></script>
-
-  <script src="vendors/gijgo/gijgo.min.js"></script>
-
-  <script src="vendors/datatable/js/jquery.dataTables.min.js"></script>
-  <script src="vendors/datatable/js/dataTables.responsive.min.js"></script>
-  <script src="vendors/datatable/js/dataTables.buttons.min.js"></script>
-  <script src="vendors/datatable/js/buttons.flash.min.js"></script>
-  <script src="vendors/datatable/js/jszip.min.js"></script>
-  <script src="vendors/datatable/js/pdfmake.min.js"></script>
-  <script src="vendors/datatable/js/vfs_fonts.js"></script>
-  <script src="vendors/datatable/js/buttons.html5.min.js"></script>
-  <script src="vendors/datatable/js/buttons.print.min.js"></script>
-  <script src="js/chart.min.js"></script>
-
-  <script src="vendors/progressbar/jquery.barfiller.js"></script>
-
-  <script src="vendors/tagsinput/tagsinput.js"></script>
-
-  <script src="vendors/text_editor/summernote-bs4.js"></script>
-  <script src="vendors/apex_chart/apexcharts.js"></script>
-
-  <script src="js/custom.js"></script>
-
-
-  <script src="js/active_chart.js"></script>
-  <script src="vendors/apex_chart/radial_active.js"></script>
-  <script src="vendors/apex_chart/stackbar.js"></script>
-  <script src="vendors/apex_chart/area_chart.js"></script>
-  <script src="vendors/apex_chart/bar_active_1.js"></script>
-  <script src="vendors/chartjs/chartjs_active.js"></script>
-
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js"></script>
 </body>
 
 </html>

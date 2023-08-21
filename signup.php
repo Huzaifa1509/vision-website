@@ -1,5 +1,5 @@
 <?php
-include('connection.php');
+include('../connection.php');
 if(isset($_POST["submitbtn"])){
     $name = $_POST['Name'];
     $lname = $_POST['lastname'];

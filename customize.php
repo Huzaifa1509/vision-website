@@ -41,14 +41,41 @@
 </head>
 
 <style>
-  div.scroll {
+  .scroll {
     margin: 4px, 4px;
     padding: 4px;
     width: 100%;
-    height: 400px;
+    height: 250px;
     overflow-x: hidden;
     overflow-y: scroll;
     text-align: justify;
+  }
+  /* width */
+.scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.scroll::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 20px
+}
+ 
+/* Handle */
+.scroll::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 20px
+
+}
+
+/* Handle on hover */
+.scroll::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+  #ID_cartList{
+    background: #111111;
+    color: white;
+    border-radius: 11px;
   }
 </style>
 
@@ -65,12 +92,7 @@
   </section>
 
   <div class="container-fluid">
-    <div class="row mt-5" id="ID_cartList">
-
-
-      <!-- product image -->
-
-    </div>
+    <!-- <div class="row mt-5" id="ID_cartList"> </div> -->
   </div>
 	<section class="newproduct bgwhite p-t-45 p-b-105">
 
@@ -79,7 +101,7 @@
   <button type="button" onclick="default_cat(5)" class="s-text13 btn btn-outline-dark active">PC Cases</button>
 
   <?php
-  if(!empty($_SESSION['customlist'])){
+  // if(!empty($_SESSION['customlist'])){
   $select_cat = "SELECT * FROM `tbl_category` LIMIT 4";
 							$select_cat_run = mysqli_query($con , $select_cat);
 							while($category = mysqli_fetch_array($select_cat_run)){?>
@@ -88,13 +110,18 @@
 									<?php echo $category['cat_name'];?>
               </button>
 
-							<?php }}?>
+							<?php }
+              // }
+              ?>
   </div>
   <hr>
-  <div class="container" >
-  <div class="row" id="fetch_cat">
-</div>
-        
+  <div class="container-fluid" >
+    <div class="row mt-5">
+
+      <div class="col-lg-8 p-0"  id="fetch_cat"></div>         
+  <div  id="ID_cartList" class=" p-0 col-lg-4"></div>
+ 
+        </div>
         </div>
 </div>
 </section>

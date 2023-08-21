@@ -67,14 +67,14 @@ if (isset($_POST['cart'])) {
 ?>
 <?php if(!empty($_SESSION['customlist'])){?>
 
-<div class="col-sm-4 mt-5">
+<!-- <div class="col-sm-4 mt-5">
  
  <div class="text-center" data-aos="fade-right"><img src="./admin/img/<?php echo $_SESSION["customlist"][0]["c_img"];?>" alt="pics"
      height="100%" width="100%"></div>
 
-</div>
+</div> -->
 <!-- product specs -->
-<div class="col-sm-5 mt-5 d-flex align-items-center">
+<!-- <div class="col-sm-5 mt-5 d-flex align-items-center">
  <div class="mt-5" data-aos="fade-up">
    <h1 class="title"><?php echo $_SESSION["customlist"][0]["c_name"]?></h1>
    <h5 class="title mb-2">Product Description</h5>
@@ -96,38 +96,54 @@ if (isset($_POST['cart'])) {
 
 
    </div>
-   
-
-
  </div>
-</div>
+</div> -->
 <!-- products selected by user to add -->
-<div class="col-sm-3 comp mt-5">
- <h4 class="title text-center">Components</h4>
+<!-- <div class="col-sm-3 comp mt-5"> -->
+ <h5 class="title mt-3 text-center">Components</h5>
  <hr>
- <div class="scroll d-flex row text-center" data-aos="zoom-in">
- 
+ <!-- scroll d-flex  text-center -->
+ <div class="p-3" data-aos="zoom-in">
+    <ol class="list-group list-group-numbered scroll">
      <?php foreach ($_SESSION['customlist'] as $key => $value) { ?>
      
-       <div class="col-6 cb">
+       <!-- <div class="col-12 cb">
                <div class=" card-body text-center">
                  <img src="<?php echo "./admin/img/" . $value['c_img'] ?>" alt="pics" height="100px">
                   <h6><?php echo $value['c_name'] ?></h6>
                   <p><?php echo "Rs. " . $value['c_price'] ?></p>
                </div>
-             </div>
-     <?php } ?>
+             </div> -->
+
      
+  
+  <li class="list-group-item d-flex justify-content-between align-items-start " style="background:none">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">
+       <h6> <?php echo $value['c_name'] ?></h6> 
+      </div>
+     <b> <?php echo "Rs. " . $value['c_price'] ?> </b>
+    </div>
+    <span class="badge bg-dark rounded-pill"><img src="<?php echo "./admin/img/" . $value['c_img'] ?>" alt="pics" height="50px" width="50px"></span>
+  </li>
+      <?php } ?>
+ 
+</ol>
+
+
+
+
      
-     <div><hr><br>
-               <h4>Total :
+     <div class="text-right"><hr><br>
+               <h6>Total :
                       <?php
          $myitems = array_column($_SESSION['customlist'], 'c_price');
          $sum = array_sum($myitems);
          echo "Rs " . $sum;
      
          ?>
-         </h4>
+         &nbsp; &nbsp; &nbsp;
+         </h6>
              </div>
 
 

@@ -1,9 +1,7 @@
 <?php
 include('../connection.php');
 include('verification.php');
-// if(!isset( $_SESSION['admin_loggedin'])){
-//     header('location:login.php');
-// }
+$order_id = $_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,44 +29,32 @@ include('verification.php');
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">View Order</h1>
-                    <table class="table table-bordered text-center"  id="datatablesSimple">
-                <tr>
-  
-                    <th>Date</th>
-                    <th>User Name</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Total Purchase</th>
-                    <th></th>
+                    <table class="table table-bordered text-center" id="datatablesSimple">
+                        <thead>
+                            <th>Component Image</th>
+                            <th>Name</th>
+                            <th>Component Category</th>
+                            <th>Price</th>
+                        </thead>
+
+                        <?php 
 
 
+$select_query = "SELECT * FROM tbl_custompc_checkout INNER JOIN tbl_category ON tbl_category.cat_id = tbl_custompc_checkout.product_cat  WHERE `order_id` = '$order_id'";
 
-                
-
-                </tr>
-            
-<?php 
-
-$select_query = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id ORDER BY `o_id` DESC LIMIT 50";
 $select_query_run = mysqli_query($con, $select_query);
 while($purchase = mysqli_fetch_array($select_query_run)){
 ?>
-                <tr>
+                        <tr>
+                            <td><img src="img/<?php echo $purchase['product_image']; ?>" alt="product_img"
+                                    style="height:100px;"></td>
+                            <td><?php echo $purchase['product_name']; ?></td>
+                            <td><?php echo $purchase['cat_name']; ?></td>
+                            <td>Rs.<?php echo $purchase['product_price']; ?></td>
+                        </tr>
+                        <?php } ?>
 
-                    <td><?php echo $purchase['o_date']; ?></td>
-                    <td><?php echo $purchase['uname'].$purchase['lastname']; ?></td>
-                    <td><?php echo $purchase['address']; ?></td>
-                    <td><?php echo $purchase['email']; ?></td>
-                    <td>Rs.<?php echo $purchase['total_purchase']; ?></td>
-                    <td><a href="vieworder.php?id=<?php echo $purchase['o_id']; ?>" class="btn btn-primary">View Data</a></td>
-
-
-
-
-                </tr>
-<?php } ?>
-
-            </table>
+                    </table>
                 </div>
             </main>
             <!-- footer -->
