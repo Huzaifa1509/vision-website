@@ -100,7 +100,7 @@ if (isset($_POST['cart'])) {
 </div> -->
 <!-- products selected by user to add -->
 <!-- <div class="col-sm-3 comp mt-5"> -->
- <h5 class="title mt-3 text-center">Components</h5>
+ <h5 class="title mt-3 text-center fs-bold">Components</h5>
  <hr>
  <!-- scroll d-flex  text-center -->
  <div class="p-3" data-aos="zoom-in">
@@ -145,12 +145,17 @@ if (isset($_POST['cart'])) {
          &nbsp; &nbsp; &nbsp;
          </h6>
              </div>
+             <div class="text-left"><hr><br>
+             
+               <a href="place_order.php" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">Place Order</a>
+             </div>
+
 
 
  </div>
 </div>
 <?php }else{?>
- <div class="col-sm-12 mt-5"><center><h1 class="text-center">Start Building Your PC</h1><center>   </div>   
+ <div class="col-sm-12 mt-5"><center><h5 class="text-center mb-5">Start Building Your PC</h><center>   </div>   
 
 <?php }?>
 

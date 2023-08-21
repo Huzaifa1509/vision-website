@@ -79,8 +79,8 @@
   }
 </style>
 
-<!-- <body class="animsition"> -->
-  <body>
+<body class="animsition">
+
 
 
   <?php include("nav.php");?>

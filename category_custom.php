@@ -17,7 +17,7 @@ if(isset($_POST['catid'])){
 <div class="card" >
 <img src="<?php echo './admin/img/'.$row['p_img'];?>" class="card-img-top" alt="..." style="height: 200px;">
 <div class="card-body">
-<h6 class="card-title"><?php echo $row['p_name'];?></h6>
+<h6 class="card-title" style="height: 20px;"><?php echo $row['p_name'];?></h6>
 <p class="card-text">Rs.<?php echo $row['p_price'];?></p>
 
 

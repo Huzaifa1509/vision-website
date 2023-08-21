@@ -71,8 +71,11 @@ try {
   
 	
 	
-	echo "<script>alert('Order Placed! Thanks for Purchasing :)')</script>";
-	header('location:index.php');
+	echo '<script>alert("Order Placed");
+    
+	window.location.href = "index.php";
+   
+   </script>';
     exit();
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
