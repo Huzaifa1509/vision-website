@@ -30,20 +30,15 @@ $order_id = $_GET['id'];
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">User Purchase</h1>
                     <table class="table table-bordered text-center">
-                        <tr>
+                        <thead>
+       
                             <th>Product Name</th>
                             <th>Product Description</th>
                             <th>Product Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
 
-
-
-
-
-
-
-                        </tr>
+                        </thead>
 
                         <?php 
 

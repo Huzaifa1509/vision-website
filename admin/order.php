@@ -32,7 +32,7 @@ include('verification.php');
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">View Order</h1>
                     <table class="table table-bordered text-center"  id="datatablesSimple">
-                <tr>
+                <thead>
   
                     <th>Date</th>
                     <th>User Name</th>
@@ -45,7 +45,7 @@ include('verification.php');
 
                 
 
-                </tr>
+                </thead>
             
 <?php 
 

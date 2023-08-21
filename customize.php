@@ -77,6 +77,21 @@
     color: white;
     border-radius: 11px;
   }
+
+  @media screen and (max-width: 480px) {
+
+    .categories{
+
+      overflow-x: scroll;
+      overflow-y: hidden;
+
+      display: flex;
+    }
+
+
+
+}
+
 </style>
 
 <body class="animsition">
@@ -90,15 +105,11 @@
       Built Your PC
     </h2>
   </section>
-
-  <div class="container-fluid">
-    <!-- <div class="row mt-5" id="ID_cartList"> </div> -->
-  </div>
 	<section class="newproduct bgwhite p-t-45 p-b-105">
 
   <div class="categories text-center mb-3">
 
-  <button type="button" onclick="default_cat(5)" class="s-text13 btn btn-outline-dark active">PC Cases</button>
+  <button type="button" onclick="default_cat(5)" class="s-text13 btn btn-outline-dark active">PC Cases</button>&nbsp;
 
   <?php
   // if(!empty($_SESSION['customlist'])){
@@ -108,7 +119,7 @@
 
 								<button type="button" onclick="cat_func(<?php echo $category['cat_id'] ?>)" class="s-text13 btn btn-outline-dark">
 									<?php echo $category['cat_name'];?>
-              </button>
+              </button>&nbsp;
 
 							<?php }
               // }
@@ -119,11 +130,12 @@
     <div class="row mt-5">
 
       <div class="col-lg-8 p-0"  id="fetch_cat"></div>         
-  <div  id="ID_cartList" class=" p-0 col-lg-4"></div>
+  <div   class=" p-0 col-lg-4" id="ID_cartList"></div>
  
         </div>
         </div>
 </div>
+
 </section>
 
   <?php include("footer.php");?>

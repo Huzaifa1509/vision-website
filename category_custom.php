@@ -7,10 +7,10 @@ if(isset($_POST['catid'])){
    $cat_id = $_POST['catid'];
    $select_query = "SELECT * FROM `tbl_products` WHERE `p_cat` = '$cat_id'";
    $select_query_run = mysqli_query($con , $select_query); ?>
-   <div class="row">
+   <div class="row container">
    <?php while ($row = mysqli_fetch_array($select_query_run)) { ?>
 
-    <div class="col-lg-3 col-md-3 col-sm-12 col-12" >
+    <div class="col-lg-3 col-md-3 col-sm-12 col-12 mb-2" >
 
 
  
