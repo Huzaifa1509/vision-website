@@ -86,7 +86,7 @@ if(isset($_POST['btn_cart'])){
 
 </head>
 
-<body class="animsition">
+<body>
 
 	<?php include("nav.php");?>
 

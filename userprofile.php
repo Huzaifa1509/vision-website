@@ -37,7 +37,7 @@ if(!isset( $_SESSION['check'])){
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 
 </head>
-<body class="animsition">
+<body>
 
 	<?php include("nav.php");?>
 

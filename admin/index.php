@@ -115,16 +115,16 @@ include('verification.php');
                             <!-- id datatablesSimple -->
                             <table class="table table-bordered text-center" id="datatablesSimple">
                       
-    <tr class="fw-bold">
-        <thead>
+    <thead>
+
         <th class="text-center">Username</th>
         <th class="text-center">Phone No</th>
         <th class="text-center">Email</th>
         <th class="text-center">Message</th>
-        </thead>
 
 
-    </tr>
+
+    </thead>
 
 <?php 
 

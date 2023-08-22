@@ -70,9 +70,11 @@ if(isset($_POST['loginbtn'])){
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
 
-<body class="animsition">
+<body>
 
 
 	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/other.jpg);">
@@ -86,6 +88,8 @@ if(isset($_POST['loginbtn'])){
 
 	<section class="bgwhite p-t-55 p-b-65">
 		<div class="container">
+
+		<a href="index.php"><i class="fa-solid fa-arrow-left fa-2xl"></i></a>
     <div class="container-fluid">
         <form method="POST">
             <div class="text-center">
@@ -106,11 +110,9 @@ if(isset($_POST['loginbtn'])){
             <input value="Login" type="submit" name="loginbtn"
                 class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
             <hr>
+
             <div class="text-center">
-                <a class="small" href="forgot-password.html">Forgot Password?</a>
-            </div>
-            <div class="text-center">
-                <a class="small" href="signup.php">Create an Account!</a>
+                Don't have an Account? <a  href="signup.php">Create an Account!</a>
             </div>
         </form>
     </div>
@@ -118,7 +120,7 @@ if(isset($_POST['loginbtn'])){
 </section>
 
 
-	<?php include("footer.php");?>
+
 
 	<div class="btn-back-to-top bg0-hov" id="myBtn">
 		<span class="symbol-btn-back-to-top">

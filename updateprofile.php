@@ -53,7 +53,7 @@ if(isset($_POST['updatebtn'])){
 
 </head>
 
-<body class="animsition">
+<body>
 
     <?php include("nav.php");?>
 

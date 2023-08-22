@@ -1,5 +1,5 @@
 <?php
-include('../connection.php');
+include('connection.php');
 if(isset($_POST["submitbtn"])){
     $name = $_POST['Name'];
     $lname = $_POST['lastname'];
@@ -59,8 +59,10 @@ if(isset($_POST["submitbtn"])){
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
-<body class="animsition">
+<body>
 
 
     <section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/other.jpg);">
@@ -74,6 +76,7 @@ if(isset($_POST["submitbtn"])){
 
     <section class="bgwhite p-t-55 p-b-65">
         <div class="container">
+        <a href="index.php"><i class="fa-solid fa-arrow-left fa-2xl"></i></a>
             <div class="container-fluid">
                 <form method="POST">
                     <div class="text-center">
@@ -102,7 +105,7 @@ if(isset($_POST["submitbtn"])){
                     <input type="submit" name="submitbtn" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4"
                         value="Register Account">
                     <div class="text-center">
-                        <a class="small" href="login.php">Already have an account? Login!</a>
+                        <a href="login.php">Already have an account? Login!</a>
                     </div>
                 </form>
             </div>
@@ -110,7 +113,7 @@ if(isset($_POST["submitbtn"])){
     </section>
 
 
-    <?php include("footer.php");?>
+
 
     <div class="btn-back-to-top bg0-hov" id="myBtn">
         <span class="symbol-btn-back-to-top">

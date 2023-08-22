@@ -160,7 +160,7 @@ try {
 
 </head>
 
-<body class="animsition">
+<body>
 
 	<?php include("nav.php");?>
 	<div class="Cl_OuterLoader" id="ID_Loader">
