@@ -111,13 +111,10 @@ if(isset($_POST['btn_cart'])){
 						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
 
 							<div class="block2">
-								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+								<div class="block2-img wrap-pic-w of-hidden pos-relative ">
 									<img src="<?php echo 'admin/img/' . $data['p_img'];?>" alt="IMG-PRODUCT" style="height:300px;">
 									<div class="block2-overlay trans-0-4">
-										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-											<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-											<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-										</a>
+
 										<div class="block2-btn-addcart w-size1 trans-0-4">
 
 											<form method="post">
@@ -264,6 +261,22 @@ if(isset($_POST['btn_cart'])){
       });
 
     }
+
+	$(document).ready(function() {
+	  $.ajax({
+			  url: "shopproducts_data.php",
+			  type: "GET",
+
+			  // cache: false,
+			  success: function(Result) {
+	  
+	  
+				$("#hide").html(Result);
+	  
+	  
+			  }
+			});
+	});
   
 
 		</script>

@@ -1,14 +1,12 @@
 <?php include("connection.php");
-if(!isset( $_SESSION['check'])){
-    header('location:login.php');
-}
+$order_id = $_GET['id'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>User Profile</title>
+    <title>User Purchases</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -42,100 +40,50 @@ if(!isset( $_SESSION['check'])){
 <body>
 
     <?php include("nav.php");?>
-
     <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(images/other.jpg);">
         <h2 class="l-text2 t-center">
             <?php echo $_SESSION["uname"].'&nbsp;'.$_SESSION["lastname"] ;?>
         </h2>
 
     </section>
+    <div class="container mt-5 px-4">
+    <a href="userprofile.php"><i class="fa-solid fa-arrow-left fa-2xl"></i></a>
+        <h3 class="mt-4 text-center mb-5">Purchases</h3>
+        <table class="table table-bordered text-center">
+            <thead>
 
-    <div class="container mt-5">
+                <th class="text-center">Product Name</th>
+                <th class="text-center">Product Price</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-center">Total</th>
 
-        <div class="row d-flex justify-content-center">
+            </thead>
 
-            <div class="col-md-7">
-
-                <div class=" p-3 py-4">
-
-                    <div class="text-center">
-                        <img src="images/<?php echo $_SESSION["upic"]; ?>" width="100" class="rounded-circle">
-                    </div>
-
-                    <div class="text-center mt-3">
-                        <!-- <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span> -->
-                        <h4 class="mt-2 mb-2"><?php echo $_SESSION["uname"].'&nbsp;'.$_SESSION["lastname"] ;?></h4>
-                        <span><?php echo $_SESSION["email"] ;?></span>
-
-                        <div class="px-4 mt-2 mb-3">
-                            <p class="fonts">Welcome <?php echo $_SESSION["uname"].'&nbsp;'.$_SESSION["lastname"] ;?>,
-                                hope you are enjoying our services. You can also update your Profile and take further
-                                Actions. </p>
-
-                        </div>
-                        <div class="buttons">
-
-                            <a href="updateprofile.php?id=<?php echo $_SESSION["id"] ;?>"><button
-                                    class="btn btn-primary px-4">Update</button></a>
-                            <a href="logout.php" onclick="return confirm('Are you sure you want to logout?')"><button
-                                    class="btn btn-danger px-4 ms-3">LOG OUT</button></a>
-                        </div>
+            <?php 
 
 
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-    <h3 class="text-center mt-3 mb-2">Order History</h3>
-	<div class="container d-flex justify-content-center align-items-center">
-    <table class="table table-bordered">
-        <thead>
-            <th>Date</th>
-            <th>Address</th>
-            <th>Total Purchase</th>
-            <th></th>
-        </thead>
-        <?php 
-$user_id = $_SESSION["id"];
-$select_query = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id WHERE `u_id` = '$user_id' AND `status` = '0' ";
+$select_query = "SELECT * FROM `tbl_checkout` WHERE `o_id` = '$order_id'";
 $select_query_run = mysqli_query($con, $select_query);
 while($purchase = mysqli_fetch_array($select_query_run)){
 ?>
-        <tr>
-
-            <td><?php echo $purchase['o_date']; ?></td>
-            <td><?php echo $purchase['address']; ?></td>
-            <td>Rs.<?php echo $purchase['total_purchase']; ?></td>
-            <td><a href="view.php?id=<?php echo $purchase['o_id']; ?>" class="btn btn-primary">View Purchases</a>&nbsp;<input class="btn btn-success" value="Pending" disabled></td>
-
-
-
-
-        </tr>
-        <?php } ?>
-        <?php 
-$user_id = $_SESSION["id"];
-$select_query_delivered = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id WHERE `u_id` = '$user_id' AND `status` = '1' ORDER BY `o_id` DESC";
-$select_query_delivered_run = mysqli_query($con, $select_query_delivered);
-while($purchase_delivered = mysqli_fetch_array($select_query_delivered_run)){
-?>
-        <tr>
-
-            <td><?php echo $purchase_delivered['o_date']; ?></td>
-            <td><?php echo $purchase_delivered['address']; ?></td>
-            <td>Rs.<?php echo $purchase_delivered['total_purchase']; ?></td>
-            <td><a href="view.php?id=<?php echo $purchase_delivered['o_id']; ?>" class="btn btn-primary">View Purchases</a>&nbsp;<input class="btn btn-secondary" value="Recieved" disabled></td>
+            <tr>
+                <td><?php echo $purchase['p_name']; ?></td>
+                <td>Rs.<?php echo $purchase['p_price']; ?></td>
+                <td><?php echo $purchase['p_qty']; ?></td>
+                <td><?php echo $purchase['p_price']; ?> x <?php echo $purchase['p_qty']; ?> = Rs.<?php $sumproduct = $purchase['p_price']*$purchase['p_qty'];
+                    echo $sumproduct;?></td>
 
 
 
 
-        </tr>
-        <?php } ?>
-    </table>
-	</div>
+
+
+
+            </tr>
+            <?php } ?>
+
+        </table>
+    </div>
 
 
 

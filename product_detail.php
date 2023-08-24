@@ -197,7 +197,7 @@ if(isset($_POST['btn_cart'])){
 					<div class="item-slick2 p-l-15 p-r-15">
 
 						<div class="block2">
-							<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+							<div class="block2-img wrap-pic-w of-hidden pos-relative">
 								<img src="<?php echo 'admin/img/' . $item['p_img'];?>" alt="IMG-PRODUCT" style="height: 300px;">
 								<div class="block2-overlay trans-0-4">
 									<div class="block2-btn-addcart w-size1 trans-0-4">

@@ -3,8 +3,7 @@ include("connection.php");
 // session_start();
 $brand_id = $_GET['brand_id'];
 $cat_id = $_GET['cat_id'];
-$select_query = "SELECT * FROM `tbl_products` WHERE `p_cat` = $cat_id AND `p_brand` = $brand_id";
-$query_run = mysqli_query($con , $select_query);
+
 if(isset($_POST['btn_cart'])){
     if(isset($_SESSION['check'])){
 	 if(isset($_SESSION['products'])){
@@ -114,6 +113,8 @@ if(isset($_POST['btn_cart'])){
 		<?php }?>
 	
 	</section>
+	<input type="hidden" id="c_id" value="<?php echo $cat_id; ?>">
+	<input type="hidden" id="b_id" value="<?php echo $brand_id; ?>">
 	
 	<section class="bgwhite p-t-55 p-b-65">
 		<div class="container">
@@ -161,60 +162,7 @@ if(isset($_POST['btn_cart'])){
 					</div>
 				</div>
 				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-					<div class="row">
-						<?php while($data = mysqli_fetch_array($query_run)){?>
-						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-
-							<div class="block2">
-								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-									<img src="<?php echo 'admin/img/' . $data['p_img'];?>" alt="IMG-PRODUCT" style="height:250px;">
-									<div class="block2-overlay trans-0-4">
-										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-											<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-											<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-										</a>
-										<div class="block2-btn-addcart w-size1 trans-0-4">
-
-											<form method="post">
-											<input type="hidden" name="p_id"
-													value="<?php echo $data['p_id'];?>">
-
-												<input type="hidden" name="p_price"
-													value="<?php echo $data['p_price'];?>">
-
-												<input type="hidden" name="p_image"
-													value="<?php echo 'admin/img/'. $data['p_img'];?>">
-
-												<input type="hidden" name="p_description"
-													value="<?php echo $data['p_description'];?>">
-
-												<input type="hidden" name="p_name"
-													value="<?php echo $data['p_name'];?>">
-
-												<input type="hidden" name="p_brand"
-													value="<?php echo $data['p_brand'];?>">
-
-												<input type="hidden" name="p_cat" value="<?php echo $data['p_cat'];?>">
-
-												<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"
-													name="btn_cart" type="submit">
-													Add to Cart
-												</button>
-											</form>
-										</div>
-									</div>
-								</div>
-								<div class="block2-txt p-t-20">
-									<a href="product_detail.php?id=<?php echo $data['p_id'];?>&&cat_id=<?php echo $cat_id;?>" class="block2-name dis-block s-text3 p-b-5">
-										<?php echo $data['p_name'];?>
-									</a>
-									<span class="block2-price m-text6 p-r-5">
-										$ <?php echo $data['p_price'];?>
-									</span>
-								</div>
-							</div>
-						</div>
-						<?php }?>
+					<div class="row" id="show_data">
 					</div>
 
 
@@ -297,6 +245,36 @@ if(isset($_POST['btn_cart'])){
 		crossorigin="anonymous"></script>
 
 		<script>
+
+  
+</script>
+
+		<script>
+	$(document).ready(function() {
+	  var brand_id = $('#b_id').val();
+	  var cat_id = $('#c_id').val();
+
+	  $.ajax({
+			  url: "brand_products_data.php",
+			  type: "POST",
+			  data: {
+				brand_id: brand_id,
+				cat_id: cat_id,
+
+			  },
+
+			  // cache: false,
+			  success: function(Result) {
+	  
+	  
+				$("#show_data").html(Result);
+	  
+	  
+			  }
+			});
+	});
+		
+		</script>
 
   
 </script>

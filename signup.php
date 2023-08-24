@@ -6,13 +6,14 @@ if(isset($_POST["submitbtn"])){
     $email = $_POST['email'];
     $password = $_POST['pass'];
     $rep_password = $_POST['rep_pass'];
+    $def_pic = "icons/icon-header-03.png";
     $query = mysqli_query($con , "SELECT * FROM `tbl_user` WHERE uname = '$name' OR email = '$email'");
     if(mysqli_num_rows($query) > 0){
         echo "<script> alert('Username or Email has already been taken')</script>";
     }
     else{
         if($password == $rep_password){
-            $queryinsert = "INSERT INTO `tbl_user` VALUES ('','$name','$lname','$email','$password')";
+            $queryinsert = "INSERT INTO `tbl_user` VALUES ('','$name','$lname','$email','$password','$def_pic')";
             mysqli_query($con , $queryinsert);
             
           header("location:login.php");
@@ -104,10 +105,10 @@ if(isset($_POST["submitbtn"])){
                     </div>
                     <input type="submit" name="submitbtn" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4"
                         value="Register Account">
+                    </form>
                     <div class="text-center">
                         <a href="login.php">Already have an account? Login!</a>
                     </div>
-                </form>
             </div>
         </div>
     </section>
