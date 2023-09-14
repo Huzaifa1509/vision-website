@@ -27,7 +27,7 @@ include('verification.php');
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">View Product</h1>
+                    <h3 class="mt-4 mb-2 text-center">Products</h3>
                     <table class="table table-bordered text-center" id="datatablesSimple">
                         <thead>
                             <th>Name</th>

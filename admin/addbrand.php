@@ -35,7 +35,7 @@ if(isset($_POST['submitbtn'])){
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Maintain Brand</h1>
+                    <h3 class="mt-4 mb-2 text-center">Add a New Brand</h3>
                     <form method="post" >
                                 <div class="mb-3">
                                  <label>Brand Name</label>

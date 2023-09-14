@@ -27,7 +27,7 @@ include('verification.php');
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">View User</h1>
+                    <h3 class="mt-4 mb-2 text-center">Users Registered</h3>
                     <table class="table table-light table-bordered text-center">
                 <tr>
                     <th>Full Name</th>

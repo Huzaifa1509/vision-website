@@ -1,6 +1,6 @@
 <?php
 include("connection.php");
-$select_query = "SELECT * FROM `tbl_products`";
+$select_query = "SELECT * FROM `tbl_products` ORDER BY `p_id` DESC";
 $query_run = mysqli_query($con , $select_query);
 
 

@@ -51,7 +51,7 @@ include('verification.php');
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Maintain Product</h1>
+                    <h3 class="mt-4 mb-2 text-center">Add a New Product</h3>
                     <form method="post" enctype="multipart/form-data">
                          <div class="row">
                 <div class="mb-3 col-lg-6">

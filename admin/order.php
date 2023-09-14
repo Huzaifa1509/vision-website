@@ -33,26 +33,20 @@ include('verification.php');
                     <h3 class="mt-4 text-center">Products to be Delivered</h3>
                     <table class="table table-bordered text-center" id="datatablesSimple">
                         <thead>
-
                             <th>Date</th>
                             <th>User Name</th>
                             <th>Address</th>
                             <th>Email</th>
                             <th>Total Purchase</th>
                             <th></th>
-
-
-
-
-
                         </thead>
 
                         <?php 
 
-$select_query = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id WHERE `status` = '0'";
-$select_query_run = mysqli_query($con, $select_query);
-while($purchase = mysqli_fetch_array($select_query_run)){
-?>
+                             $select_query = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id WHERE `status` = '0'";
+                             $select_query_run = mysqli_query($con, $select_query);
+                            while($purchase = mysqli_fetch_array($select_query_run)){
+                        ?>
                         <tr>
 
                             <td><?php echo $purchase['o_date']; ?></td>
@@ -66,50 +60,6 @@ while($purchase = mysqli_fetch_array($select_query_run)){
                                     class="btn btn-success">Delivered</a>
 
 
-                            </td>
-
-
-
-
-                        </tr>
-                        <?php } ?>
-
-                    </table>
-                    <hr>
-                </div>
-                <div class="container-fluid px-4 mt-5">
-                    <h4 class="mt-4 text-center">Recently Delivered Products</h4>
-                    <table class="table table-bordered text-center" id="datatablesSimple">
-                        <thead>
-
-                            <th>Date</th>
-                            <th>User Name</th>
-                            <th>Address</th>
-                            <th>Email</th>
-                            <th>Total Purchase</th>
-                            <th></th>
-
-
-
-
-
-                        </thead>
-
-                        <?php 
-
-$select_query_delivered = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id WHERE `status` = '1' ORDER BY `o_id` DESC LIMIT 30";
-$select_query_delivered_run = mysqli_query($con, $select_query_delivered);
-while($purchase_delivered = mysqli_fetch_array($select_query_delivered_run)){
-?>
-                        <tr>
-
-                            <td><?php echo $purchase_delivered['o_date']; ?></td>
-                            <td><?php echo $purchase_delivered['uname'].$purchase_delivered['lastname']; ?></td>
-                            <td><?php echo $purchase_delivered['address']; ?></td>
-                            <td><?php echo $purchase_delivered['email']; ?></td>
-                            <td>Rs.<?php echo $purchase_delivered['total_purchase']; ?></td>
-                            <td><a href="vieworder.php?id=<?php echo $purchase_delivered['o_id']; ?>" class="btn btn-primary">View
-                                    Data</a>
                             </td>
 
 

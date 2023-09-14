@@ -82,60 +82,77 @@ if(!isset( $_SESSION['check'])){
                         </div>
 
 
+
                     </div>
+
                 </div>
 
             </div>
 
         </div>
     </div>
+
+
+
+
+
     <h3 class="text-center mt-3 mb-2">Order History</h3>
-	<div class="container d-flex justify-content-center align-items-center">
-    <table class="table table-bordered">
-        <thead>
-            <th>Date</th>
-            <th>Address</th>
-            <th>Total Purchase</th>
-            <th></th>
-        </thead>
-        <?php 
-$user_id = $_SESSION["id"];
+    <div class="container">
+
+        <div class="container-table-cart pos-relative mt-5">
+            <div class="wrap-table-shopping-cart bgwhite">
+                <table
+                    class="table table-bordered table-shopping-cart d-flex justify-content-center align-items-center">
+                    <tr class="table-head">
+                        <th>Date</th>
+                        <th>Address</th>
+                        <th>Total Purchase</th>
+                        <th></th>
+                        </thead>
+                        <?php 
+                $user_id = $_SESSION["id"];
 $select_query = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id WHERE `u_id` = '$user_id' AND `status` = '0' ";
 $select_query_run = mysqli_query($con, $select_query);
 while($purchase = mysqli_fetch_array($select_query_run)){
 ?>
-        <tr>
+                    <tr>
 
-            <td><?php echo $purchase['o_date']; ?></td>
-            <td><?php echo $purchase['address']; ?></td>
-            <td>Rs.<?php echo $purchase['total_purchase']; ?></td>
-            <td><a href="view.php?id=<?php echo $purchase['o_id']; ?>" class="btn btn-primary">View Purchases</a>&nbsp;<input class="btn btn-success" value="Pending" disabled></td>
-
-
-
-
-        </tr>
-        <?php } ?>
-        <?php 
-$user_id = $_SESSION["id"];
-$select_query_delivered = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id WHERE `u_id` = '$user_id' AND `status` = '1' ORDER BY `o_id` DESC";
-$select_query_delivered_run = mysqli_query($con, $select_query_delivered);
-while($purchase_delivered = mysqli_fetch_array($select_query_delivered_run)){
-?>
-        <tr>
-
-            <td><?php echo $purchase_delivered['o_date']; ?></td>
-            <td><?php echo $purchase_delivered['address']; ?></td>
-            <td>Rs.<?php echo $purchase_delivered['total_purchase']; ?></td>
-            <td><a href="view.php?id=<?php echo $purchase_delivered['o_id']; ?>" class="btn btn-primary">View Purchases</a>&nbsp;<input class="btn btn-secondary" value="Recieved" disabled></td>
+                        <td><?php echo $purchase['o_date']; ?></td>
+                        <td><?php echo $purchase['address']; ?></td>
+                        <td>Rs.<?php echo $purchase['total_purchase']; ?></td>
+                        <td><a href="view.php?id=<?php echo $purchase['o_id']; ?>" class="btn btn-primary">View
+                                Purchases</a>&nbsp;<input class="btn btn-success" value="Pending" disabled></td>
 
 
 
 
-        </tr>
-        <?php } ?>
-    </table>
-	</div>
+                    </tr>
+                    <?php } ?>
+                    <?php 
+              $user_id = $_SESSION["id"];
+              $select_query_delivered = "SELECT * FROM tbl_order INNER JOIN tbl_user ON tbl_user.id = tbl_order.u_id WHERE `u_id` = '$user_id' AND `status` = '1' ORDER BY `o_id` DESC";
+              $select_query_delivered_run = mysqli_query($con, $select_query_delivered);
+              while($purchase_delivered = mysqli_fetch_array($select_query_delivered_run)){
+              ?>
+                    <tr>
+
+                        <td><?php echo $purchase_delivered['o_date']; ?></td>
+                        <td><?php echo $purchase_delivered['address']; ?></td>
+                        <td>Rs.<?php echo $purchase_delivered['total_purchase']; ?></td>
+                        <td><a href="view.php?id=<?php echo $purchase_delivered['o_id']; ?>"
+                                class="btn btn-primary">View
+                                Purchases</a>&nbsp;<input class="btn btn-secondary" value="Recieved" disabled></td>
+
+
+
+
+                    </tr>
+                    <?php } ?>
+                </table>
+
+            </div>
+        </div>
+    </div>
 
 
 

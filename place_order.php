@@ -152,7 +152,7 @@ try {
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="number" name="phone_number"
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="tel" name="phone_number"
 								placeholder="Phone Number" required>
 						</div>
 						<textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="message"

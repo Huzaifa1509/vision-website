@@ -75,7 +75,7 @@ include('verification.php');
                                 <div class="card-body">
                                 Total
                                     <?php 
-                                    $order_count_query = "SELECT `address` FROM tbl_order";
+                                    $order_count_query = "SELECT `address` FROM tbl_order WHERE `status` = '0'";
                                     $order_count_run = mysqli_query($con , $order_count_query);
                                     $order_count = mysqli_num_rows($order_count_run);
                                     echo $order_count;
@@ -92,7 +92,7 @@ include('verification.php');
                                 <div class="card-body">
                                 Total
                                     <?php 
-                                    $order_custom_count_query = "SELECT `order_id` FROM tbl_custompc_orders";
+                                    $order_custom_count_query = "SELECT `order_id` FROM tbl_custompc_orders WHERE `status` = '0'";
                                     $order_custom_count_run = mysqli_query($con , $order_custom_count_query);
                                     $order_custom_count = mysqli_num_rows($order_custom_count_run);
                                     echo $order_custom_count;

@@ -32,7 +32,7 @@
                 $select_cat_run = mysqli_query($con , $select_cat);
                 while($category = mysqli_fetch_array($select_cat_run)){?>
                 <li class="p-b-9">
-                    <a href="#" class="s-text7">
+                    <a href="products.php?id=<?php echo $category['cat_id']?>" class="s-text7">
                         <?php echo $category['cat_name']?>
                     </a>
                 </li>
@@ -45,17 +45,17 @@
             </h4>
             <ul>
                 <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Search
+                    <a href="index.php" class="s-text7">
+                        Home
                     </a>
                 </li>
                 <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        About Us
+                    <a href="shop_allproducts.php" class="s-text7">
+                        Shop
                     </a>
                 </li>
                 <li class="p-b-9">
-                    <a href="#" class="s-text7">
+                    <a href="contact.php" class="s-text7">
                         Contact Us
                     </a>
                 </li>
