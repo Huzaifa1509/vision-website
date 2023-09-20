@@ -93,9 +93,9 @@
                                         <?php echo $value['productname'];?>
                                     </p>
                                     <span class="header-cart-item-info">
-                                        $
+                                        Rs.
                                         <?php echo $value['productprice'];?>
-                                        .00
+                                        
                                     </span>
                                 </div>
                             </li>
@@ -104,7 +104,7 @@
                         <div class="header-cart-total">
 
 
-                            Total: $
+                            Total: Rs.
                             <?php echo $totalsumof1;?>
                         </div>
                         <div class="header-cart-buttons">
@@ -182,7 +182,7 @@
                                         <?php echo $value['productname'];?>
                                     </a>
                                     <span class="header-cart-item-info">
-                                        $
+                                        Rs.
                                         <?php echo $value['productprice'];?>.00
                                     </span>
                                 </div>
@@ -190,7 +190,7 @@
                             <?php }}?>
                         </ul>
                         <div class="header-cart-total">
-                            Total: $
+                            Total: Rs.
                             <?php echo $total;?>.00
                         </div>
                         <div class="header-cart-buttons">

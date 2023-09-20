@@ -51,7 +51,7 @@ $query_run = mysqli_query($con , $select_query);
 										<?php echo $data['p_name'];?>
 									</a>
 									<span class="block2-price m-text6 p-r-5">
-										$ <?php echo $data['p_price'];?>
+										Rs. <?php echo $data['p_price'];?>
 									</span>
 								</div>
 							</div>

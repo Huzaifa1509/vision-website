@@ -112,7 +112,7 @@ if(isset($_POST['btn_cart'])){
 					<?php echo $data['p_name'];?>
 				</h4>
 				<span class="m-text17">
-					$
+					Rs.
 					<?php echo $data['p_price'];?>
 
 				</span>

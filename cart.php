@@ -225,11 +225,11 @@ try {
 						
 								</div>
 							</td>
-							<td class="column-5" id="ID_price<?php echo $value['productid'];?>">RS. 
+							<td class="column-5" id="ID_price<?php echo $value['productid'];?>"> 
 							<?php if($value['producttotalprice'] == 0){
-								echo $value['productprice'];
+								echo 'Rs.'.$value['productprice'];
 							}else{
-								echo  $value['producttotalprice'];
+								echo  'Rs.'.$value['producttotalprice'];
 							}
 								?>
 							</td>
@@ -286,7 +286,7 @@ try {
 						Subtotal:
 					</span>
 					<span class="m-text21 w-size20 w-full-sm">
-				RS	<?php 
+				Rs.	<?php 
 					if($GLOBALS['totalsum'] == 0){
 					echo  $GLOBALS['totalsumof1']; }
 					else{
@@ -311,7 +311,7 @@ try {
 					</span>
 
 					<span id="ID_totalsum" class="m-text21 w-size20 w-full-sm">
-					RS <?php 
+					Rs. <?php 
 					if($GLOBALS['totalsum'] == 0){
 					echo  $GLOBALS['totalsumof1']; }
 					else{
