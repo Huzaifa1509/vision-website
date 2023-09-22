@@ -243,7 +243,7 @@
 									<?php echo $item['p_name'];?>
 								</a>
 								<span class="block2-price m-text6 p-r-5">
-									$
+									Rs.
 									<?php echo $item['p_price'];?>
 								</span>
 							</div>
